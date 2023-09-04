@@ -56,6 +56,33 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
+    # Validating age
+    # Method 1 (Using type attribute)
+    # age = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "type": "number",
+    #         }
+    #     )
+    # )
+
+    # Method 02 (Using Regex)
+    age = forms.CharField(
+        label="Your age",
+        min_length=2,
+        max_length=3,
+        validators=[
+            RegexValidator(
+                r"^[0-9]*$",
+                message="Only number is allowed",
+            )
+        ],
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Age",
+            }
+        ),
+    )
 
     class Meta:
         model = Candidate
