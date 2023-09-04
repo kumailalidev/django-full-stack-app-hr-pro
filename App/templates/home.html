@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt3" style="width: 95; font-size: 14px;">
+<div class="container mt-3" style="width: 95; font-size: 14px;">
     <form method="POST" class="card p-3 mt-5" autocomplete="off">
         {% csrf_token %}
         {{ form }}
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
+
+    <!-- Message from backend -->
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
+                {{ message }}
+                <a href="{% url 'home' %}" type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+            </div>
+        {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}
