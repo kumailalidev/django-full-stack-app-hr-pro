@@ -11,7 +11,10 @@ class CandidateForm(forms.ModelForm):
         max_length=50,
         # required=False,
         validators=[
-            RegexValidator(r"^[a-zA-ZÀ-ÿ\s]*$", message="Only letters is allowed !")
+            RegexValidator(
+                r"^[a-zA-ZÀ-ÿ\s]*$",
+                message="Only letters is allowed !",
+            )
         ],
         widget=forms.TextInput(
             attrs={
@@ -19,18 +22,37 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     lastname = forms.CharField(
         label="Last name",
         min_length=3,
         max_length=50,
         # required=False,
         validators=[
-            RegexValidator(r"^[a-zA-ZÀ-ÿ\s]*$", message="Only letters is allowed !")
+            RegexValidator(
+                r"^[a-zA-ZÀ-ÿ\s]*$",
+                message="Only letters is allowed !",
+            )
         ],
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Last name",
+            }
+        ),
+    )
+    email = forms.CharField(
+        label="Email address",
+        min_length=8,
+        max_length=50,
+        # required=False,
+        validators=[
+            RegexValidator(
+                r"^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$",
+                message="Put a valid email address !",
+            )
+        ],
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Email",
             }
         ),
     )
