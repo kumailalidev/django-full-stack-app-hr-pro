@@ -7,18 +7,17 @@
         {% csrf_token %}
         <!-- {{ form|crispy }} -->
         <div class="row">
-            <div class="col-6">
-                {{ form.firstname|as_crispy_field }}
-            </div>
-            <div class="col-6">
-                {{ form.lastname|as_crispy_field }}
-            </div>
+            <div class="col-6">{{ form.firstname|as_crispy_field }}</div>
+            <div class="col-6">{{ form.lastname|as_crispy_field }}</div>
         </div>
 
-        {{ form.email|as_crispy_field }}
+        <div class="row">
+            <div class="col-6">{{ form.email|as_crispy_field }}</div>
+            <div class="col-6">{{ form.age|as_crispy_field }}</div>
+        </div>
         {{ form.message|as_crispy_field }}
 
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="submit" class="btn btn-outline-primary mt-3" style="width: 90px;">Submit</button>
     </form>
 
     <!-- Message from backend -->
