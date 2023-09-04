@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container mt-3" style="width: 95; font-size: 14px;">
     <form method="POST" class="card p-3 mt-5" autocomplete="off">
         {% csrf_token %}
-        {{ form }}
+        <!-- {{ form|crispy }} -->
+        <div class="row">
+            <div class="col-6">
+                {{ form.firstname|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.lastname|as_crispy_field }}
+            </div>
+        </div>
+
+        {{ form.email|as_crispy_field }}
+        {{ form.message|as_crispy_field }}
+
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 
