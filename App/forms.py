@@ -126,17 +126,33 @@ class CandidateForm(forms.ModelForm):
     class Meta:
         model = Candidate
         exclude = ["created_at", "situation"]
-
         # fields = "__all__"
         # fields = ["firstname", "lastname", "email", "age", "message",]
 
-        # Outside Widget
+        # Native choice field
+        SALARY = (
+            ("", "Salary expectation (month)"),
+            ("Between ($3000 and $4000)", "Between ($3000 and $4000)"),
+            ("Between ($4000 and $5000)", "Between ($4000 and $5000)"),
+            ("Between ($5000 and $7000)", "Between ($5000 and $7000)"),
+            ("Between ($7000 and $10000)", "Between ($7000 and $10000)"),
+        )
+
+        # Outside Widgets
         widgets = {
+            # Phone field
             "phone": forms.TextInput(
                 attrs={
                     "style": "font-size: 13px;",
                     "placeholder": "Phone",
                     "data-mask": "(00) 00000-0000",
                 }
-            )
+            ),
+            # Salary field
+            "phone": forms.Select(
+                choices=SALARY,
+                attrs={
+                    "class": "form-control",
+                },  # Bootstrap inside the forms.py
+            ),
         }
