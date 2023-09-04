@@ -84,6 +84,19 @@ class CandidateForm(forms.ModelForm):
         ),
     )
 
+    message = forms.CharField(
+        label="About you",
+        min_length=50,
+        max_length=1000,
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "Talk a little about you",
+                "rows": 10,
+            }
+        ),
+    )
+
     class Meta:
         model = Candidate
         fields = "__all__"
