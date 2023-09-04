@@ -3,6 +3,18 @@ from .models import Candidate
 from django.core.validators import RegexValidator
 
 
+# Every letters to lowercase
+class Lowercase(forms.CharField):
+    def to_python(self, value):
+        return value.lower()
+
+
+# Every letters to lowercase
+class Uppercase(forms.CharField):
+    def to_python(self, value):
+        return value.upper()
+
+
 class CandidateForm(forms.ModelForm):
     # Validations
     firstname = forms.CharField(
@@ -39,7 +51,7 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-    job = forms.CharField(
+    job = Uppercase(
         label="Job code",
         min_length=5,
         max_length=5,
@@ -49,7 +61,7 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-    email = forms.CharField(
+    email = Lowercase(
         label="Email address",
         min_length=8,
         max_length=50,
