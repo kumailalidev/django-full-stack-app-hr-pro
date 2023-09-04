@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container text-center mt-5">
-    <h1>HOME</h1>
+<div class="container mt3" style="width: 95; font-size: 14px;">
+    <form method="POST" class="card p-3 mt-5" autocomplete="off">
+        {% csrf_token %}
+        {{ form }}
+    </form>
 </div>
 {% endblock %}
