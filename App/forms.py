@@ -51,6 +51,8 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
+
+    # Job code always in uppercase
     job = Uppercase(
         label="Job code",
         min_length=5,
@@ -61,6 +63,8 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
+
+    # email always in lowercase
     email = Lowercase(
         label="Email address",
         min_length=8,
@@ -121,9 +125,10 @@ class CandidateForm(forms.ModelForm):
 
     class Meta:
         model = Candidate
-        fields = "__all__"
+        exclude = ["created_at", "situation"]
+
+        # fields = "__all__"
         # fields = ["firstname", "lastname", "email", "age", "message",]
-        # exclude = ["firstname", "lastname", "email", "age", "message",]
 
         # Outside Widget
         widgets = {

@@ -1,5 +1,11 @@
 from django.db import models
 
+SITUATION = (
+    ("Pending", "Pending"),
+    ("Approved", "Approved"),
+    ("Disapproved", "Disapproved"),
+)
+
 
 class Candidate(models.Model):
     firstname = models.CharField(max_length=50)
@@ -10,6 +16,9 @@ class Candidate(models.Model):
     email = models.EmailField(max_length=50)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    situation = models.CharField(
+        max_length=50, null=True, choices=SITUATION, default="Pending"
+    )
 
     # Capitalize (F-name and L-name)
     def clean(self):
