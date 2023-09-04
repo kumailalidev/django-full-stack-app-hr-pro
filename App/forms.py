@@ -123,6 +123,16 @@ class CandidateForm(forms.ModelForm):
         ),
     )
 
+    # Method # 01 (Gender) (Outside the Meta class)
+    GENDER = [
+        ("M", "Male"),
+        ("F", "Female"),
+    ]
+    gender = forms.CharField(
+        label="Gender",
+        widget=forms.RadioSelect(choices=GENDER),
+    )
+
     class Meta:
         model = Candidate
         exclude = ["created_at", "situation"]
