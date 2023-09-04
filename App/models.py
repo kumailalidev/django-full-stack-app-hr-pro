@@ -11,5 +11,10 @@ class Candidate(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # Capitalize (F-name and L-name)
+    def clean(self):
+        self.firstname = self.firstname.capitalize()
+        self.lastname = self.lastname.capitalize()
+
     def __str__(self):
         return self.firstname
