@@ -70,7 +70,7 @@ class CandidateForm(forms.ModelForm):
     age = forms.CharField(
         label="Your age",
         min_length=2,
-        max_length=3,
+        max_length=2,
         validators=[
             RegexValidator(
                 r"^[0-9]*$",
