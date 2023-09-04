@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candidate
+from .models import Candidate, SMOKER
 from django.core.validators import RegexValidator
 
 
@@ -173,6 +173,13 @@ class CandidateForm(forms.ModelForm):
             # Method # 02 (Gender) (inside the Meta class)
             "gender": forms.RadioSelect(
                 choices=GENDER,
+                attrs={
+                    "class": "btn-check",
+                },
+            ),
+            # Smoker Choices
+            "smoker": forms.RadioSelect(
+                choices=SMOKER,
                 attrs={
                     "class": "btn-check",
                 },
