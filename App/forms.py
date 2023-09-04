@@ -39,6 +39,16 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
+    job = forms.CharField(
+        label="Job code",
+        min_length=5,
+        max_length=5,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Example: FR-22",
+            }
+        ),
+    )
     email = forms.CharField(
         label="Email address",
         min_length=8,
