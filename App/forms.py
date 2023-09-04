@@ -168,7 +168,7 @@ class CandidateForm(forms.ModelForm):
                 }
             ),
             # Salary field
-            "phone": forms.Select(
+            "salary": forms.Select(
                 choices=SALARY,
                 attrs={
                     "class": "form-control",
