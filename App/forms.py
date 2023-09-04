@@ -124,14 +124,14 @@ class CandidateForm(forms.ModelForm):
     )
 
     # Method # 01 (Gender) (Outside the Meta class)
-    GENDER = [
-        ("M", "Male"),
-        ("F", "Female"),
-    ]
-    gender = forms.CharField(
-        label="Gender",
-        widget=forms.RadioSelect(choices=GENDER),
-    )
+    # GENDER = [
+    #     ("M", "Male"),
+    #     ("F", "Female"),
+    # ]
+    # gender = forms.CharField(
+    #     label="Gender",
+    #     widget=forms.RadioSelect(choices=GENDER),
+    # )
 
     class Meta:
         model = Candidate
@@ -147,6 +147,10 @@ class CandidateForm(forms.ModelForm):
             ("Between ($5000 and $7000)", "Between ($5000 and $7000)"),
             ("Between ($7000 and $10000)", "Between ($7000 and $10000)"),
         )
+        GENDER = [
+            ("M", "Male"),
+            ("F", "Female"),
+        ]
 
         # Outside Widgets
         widgets = {
@@ -164,5 +168,13 @@ class CandidateForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                 },  # Bootstrap inside the forms.py
+            ),
+            # Gender Choices
+            # Method # 02 (Gender) (inside the Meta class)
+            "gender": forms.RadioSelect(
+                choices=GENDER,
+                attrs={
+                    "class": "btn-check",
+                },
             ),
         }
