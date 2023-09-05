@@ -34,13 +34,15 @@
     </form>
 
     <!-- Message from backend -->
-    {% for message in messages %}
-        {% if message.tags == 'success' %}
-            <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
-                {{ message }}
-                <a href="{% url 'home' %}" type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
-            </div>
-        {% endif %}
-    {% endfor %}
+    <div class="mt-5">
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <a href="{% url 'home' %}" type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

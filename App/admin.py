@@ -1,9 +1,12 @@
 from django.contrib import admin
 from .models import Candidate
+from .forms import CandidateForm
 from django.utils.html import format_html
 
 
 class CandidateAdmin(admin.ModelAdmin):
+    form = CandidateForm
+    radio_fields = {"smoker": admin.HORIZONTAL}  # REDUNDANT
     list_filter = ["situation"]
     list_display = [
         "firstname",
