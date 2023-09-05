@@ -17,6 +17,8 @@ class Uppercase(forms.CharField):
 
 class CandidateForm(forms.ModelForm):
     # Validations
+
+    # First name
     firstname = forms.CharField(
         label="First name",
         min_length=3,
@@ -31,9 +33,12 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "First name",
+                "style": "font-size: 13px; text-transform: capitalize;",
             }
         ),
     )
+
+    # Last name
     lastname = forms.CharField(
         label="Last name",
         min_length=3,
@@ -48,11 +53,12 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Last name",
+                "style": "font-size: 13px; text-transform: capitalize;",
             }
         ),
     )
 
-    # Job code always in uppercase
+    # Job code; always in uppercase
     job = Uppercase(
         label="Job code",
         min_length=5,
@@ -60,11 +66,12 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Example: FR-22",
+                "style": "font-size: 13px; text-transform: uppercase;",
             }
         ),
     )
 
-    # email always in lowercase
+    # Email; always in lowercase
     email = Lowercase(
         label="Email address",
         min_length=8,
@@ -79,6 +86,7 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Email",
+                "style": "font-size: 13px; text-transform: lowercase;",
             }
         ),
     )
@@ -106,15 +114,18 @@ class CandidateForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Age",
+                "style": "font-size: 13px;",
             }
         ),
     )
 
+    # Experience
     experience = forms.BooleanField(
         label="I have experience",
         required=False,
     )
 
+    # Message
     message = forms.CharField(
         label="About you",
         min_length=50,
@@ -123,7 +134,8 @@ class CandidateForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 "placeholder": "Talk a little about you",
-                "rows": 10,
+                "rows": 4,
+                "style": "font-size: 13px;",
             }
         ),
     )
@@ -143,10 +155,11 @@ class CandidateForm(forms.ModelForm):
         exclude = ["created_at", "situation"]
         # fields = "__all__"
         # fields = ["firstname", "lastname", "email", "age", "message",]
-        labels = {
-            "gender": "Your Gender",
-            "smoker": "Do you smoke ?",
-        }
+        # Labels Control
+        # labels = {
+        #     "gender": "Your Gender",
+        #     "smoker": "Do you smoke ?",
+        # }
 
         # Native choice field
         SALARY = (
@@ -176,6 +189,7 @@ class CandidateForm(forms.ModelForm):
                 choices=SALARY,
                 attrs={
                     "class": "form-control",
+                    "style": "font-size: 13px;",
                 },  # Bootstrap inside the forms.py
             ),
             # Gender Choices
@@ -192,6 +206,12 @@ class CandidateForm(forms.ModelForm):
                 attrs={
                     "class": "btn-check",
                 },
+            ),
+            # Personality
+            "personality": forms.Select(
+                attrs={
+                    "style": "font-size: 13px;",
+                }
             ),
         }
 
