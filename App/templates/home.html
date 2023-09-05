@@ -6,7 +6,7 @@
     <div class="card p-3 border-dark text-center" style="font-size: 18px;">
         Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15
     </div>
-    <form method="POST" class="card p-3 mt-5" autocomplete="off" novalidate>
+    <form method="POST" enctype="multipart/form-data" class="card p-3 mt-5" autocomplete="off" novalidate>
         {% csrf_token %}
         <!-- {{ form|crispy }} -->
         <div class="row">
