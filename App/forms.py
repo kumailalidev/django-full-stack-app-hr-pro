@@ -215,31 +215,31 @@ class CandidateForm(forms.ModelForm):
         # )
 
         # ========== SELECT OPTION ==========
-        self.fields["personality"].choices = [
-            ("", "Select a personality"),
-        ] + list(
-            self.fields["personality"].choices
-        )[1:]
+        # self.fields["personality"].choices = [
+        #     ("", "Select a personality"),
+        # ] + list(
+        #     self.fields["personality"].choices
+        # )[1:]
 
         # ========== WIDGET CONTROL ==========
         """
         Overrides all the other widget values
         """
-        self.fields["phone"].widget.attrs.update(
-            {
-                "style": "font-size: 18px;",
-                "placeholder": "No Phone",
-                "data-mask": "(00) 00-00",
-            }
-        )
+        # self.fields["phone"].widget.attrs.update(
+        #     {
+        #         "style": "font-size: 18px;",
+        #         "placeholder": "No Phone",
+        #         "data-mask": "(00) 00-00",
+        #     }
+        # )
 
         # ========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ==========
         # 1) Readonly
-        readonly = ["firstname", "lastname", "job", "email", "age", "phone", "message"]
-        for field in readonly:
-            self.fields[field].widget.attrs["readonly"] = "true"
+        # readonly = ["firstname", "lastname", "job", "email", "age", "phone", "message"]
+        # for field in readonly:
+        #     self.fields[field].widget.attrs["readonly"] = "true"
 
         # 2) Disabled
-        disabled = ["personality", "salary", "gender", "smoker", "experience"]
-        for field in disabled:
-            self.fields[field].widget.attrs["disabled"] = "true"
+        # disabled = ["personality", "salary", "gender", "smoker", "experience"]
+        # for field in disabled:
+        #     self.fields[field].widget.attrs["disabled"] = "true"
