@@ -190,3 +190,18 @@ class CandidateForm(forms.ModelForm):
                 },
             ),
         }
+
+    # SUPER FUNCTION
+    def __init__(self, *args, **kwargs):
+        super(CandidateForm, self).__init__(*args, **kwargs)
+
+        # ========== CONTROL PANEL (Optional method to control) ==========
+
+        # ========== SELECT OPTION ==========
+        self.fields["personality"].choices = [
+            ("", "Select a personality"),
+        ] + list(
+            self.fields["personality"].choices
+        )[1:]
+
+        # ========== WIDGET CONTROL ==========
