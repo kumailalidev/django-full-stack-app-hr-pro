@@ -140,6 +140,16 @@ class CandidateForm(forms.ModelForm):
         ),
     )
 
+    # File
+    file = forms.FileField(
+        required=True,
+        widget=forms.ClearableFileInput(
+            attrs={
+                "style": "font-size: 13px;",
+            }
+        ),
+    )
+
     # Method # 01 (Gender) (Outside the Meta class)
     # GENDER = [
     #     ("M", "Male"),
