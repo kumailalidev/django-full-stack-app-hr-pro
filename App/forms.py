@@ -199,29 +199,29 @@ class CandidateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CandidateForm, self).__init__(*args, **kwargs)
 
-        # ========== CONTROL PANEL (Optional method to control) ==========
+        # ========== CONTROL PANEL (Individual Inputs) ==========
 
-        # Input required
+        # 1) INPUT REQUIRED
         # self.fields["message"].required = True
 
-        # Input disabled
+        # 2) INPUT DISABLED
         # self.fields["experience"].disabled = False
 
-        # Input Readonly
+        # 3) INPUT READONLY
         # self.fields["email"].widget.attrs.update(
         #     {
         #         "readonly": "readonly",
         #     }
         # )
 
-        # ========== SELECT OPTION ==========
+        # 4) SELECT OPTION
         # self.fields["personality"].choices = [
         #     ("", "Select a personality"),
         # ] + list(
         #     self.fields["personality"].choices
         # )[1:]
 
-        # ========== WIDGET CONTROL ==========
+        # 5) WIDGETS (Inside/Outside)
         """
         Overrides all the other widget values
         """
@@ -233,13 +233,13 @@ class CandidateForm(forms.ModelForm):
         #     }
         # )
 
-        # ========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ==========
-        # 1) Readonly
+        # ========== ADVANCED CONTROL PANEL (Multiple Inputs) ==========
+        # 1) READONLY
         # readonly = ["firstname", "lastname", "job", "email", "age", "phone", "message"]
         # for field in readonly:
         #     self.fields[field].widget.attrs["readonly"] = "true"
 
-        # 2) Disabled
+        # 2) DISABLED
         # disabled = ["personality", "salary", "gender", "smoker", "experience"]
         # for field in disabled:
         #     self.fields[field].widget.attrs["disabled"] = "true"
