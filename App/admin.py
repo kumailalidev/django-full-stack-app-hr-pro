@@ -8,6 +8,28 @@ class CandidateAdmin(admin.ModelAdmin):
     form = CandidateForm
     radio_fields = {"smoker": admin.HORIZONTAL}  # REDUNDANT
     list_filter = ["situation"]
+    readonly_fields = [
+        "firstname",
+        "lastname",
+        "job",
+        "email",
+        "age",
+        "phone",
+        "salary",
+        "personality",
+        "gender",
+        "smoker",
+        "experience",
+        "file",
+        "frameworks",
+        "languages",
+        "databases",
+        "libraries",
+        "mobile",
+        "others",
+        "message",
+    ]
+    exclude = ["status"]
     list_display = [
         "firstname",
         "lastname",
