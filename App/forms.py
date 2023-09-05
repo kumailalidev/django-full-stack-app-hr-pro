@@ -234,3 +234,12 @@ class CandidateForm(forms.ModelForm):
         )
 
         # ========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ==========
+        # 1) Readonly
+        readonly = ["firstname", "lastname", "job", "email", "age", "phone", "message"]
+        for field in readonly:
+            self.fields[field].widget.attrs["readonly"] = "true"
+
+        # 2) Disabled
+        disabled = ["personality", "salary", "gender", "smoker", "experience"]
+        for field in disabled:
+            self.fields[field].widget.attrs["disabled"] = "true"
