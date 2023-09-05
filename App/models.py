@@ -4,7 +4,7 @@ from multiselectfield import MultiSelectField
 SITUATION = (
     ("Pending", "Pending"),
     ("Approved", "Approved"),
-    ("Disapproved", "Disapproved"),
+    ("Rejected", "Rejected"),
 )
 
 PERSONALITY = (
