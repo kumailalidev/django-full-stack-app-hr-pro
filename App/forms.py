@@ -197,6 +197,19 @@ class CandidateForm(forms.ModelForm):
 
         # ========== CONTROL PANEL (Optional method to control) ==========
 
+        # Input required
+        # self.fields["message"].required = True
+
+        # Input disabled
+        # self.fields["experience"].disabled = False
+
+        # Input Readonly
+        # self.fields["email"].widget.attrs.update(
+        #     {
+        #         "readonly": "readonly",
+        #     }
+        # )
+
         # ========== SELECT OPTION ==========
         self.fields["personality"].choices = [
             ("", "Select a personality"),
@@ -205,3 +218,5 @@ class CandidateForm(forms.ModelForm):
         )[1:]
 
         # ========== WIDGET CONTROL ==========
+
+        # ========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ==========
