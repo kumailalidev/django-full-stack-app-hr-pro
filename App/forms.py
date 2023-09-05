@@ -143,6 +143,10 @@ class CandidateForm(forms.ModelForm):
         exclude = ["created_at", "situation"]
         # fields = "__all__"
         # fields = ["firstname", "lastname", "email", "age", "message",]
+        labels = {
+            "gender": "Your Gender",
+            "smoker": "Do you smoke ?",
+        }
 
         # Native choice field
         SALARY = (
@@ -218,5 +222,15 @@ class CandidateForm(forms.ModelForm):
         )[1:]
 
         # ========== WIDGET CONTROL ==========
+        """
+        Overrides all the other widget values
+        """
+        self.fields["phone"].widget.attrs.update(
+            {
+                "style": "font-size: 18px;",
+                "placeholder": "No Phone",
+                "data-mask": "(00) 00-00",
+            }
+        )
 
         # ========== READONLY / DISABLED BY 'LOOP FOR' IN [ARRAY] ==========
