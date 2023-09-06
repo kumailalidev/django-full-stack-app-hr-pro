@@ -94,6 +94,7 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 "placeholder": "Email",
                 "style": "font-size: 13px; text-transform: lowercase;",
+                # "autocomplete": "off",
             }
         ),
     )
@@ -125,6 +126,7 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 "placeholder": "Age",
                 "style": "font-size: 13px;",
+                # "autocomplete": "off",
             }
         ),
     )
@@ -312,16 +314,31 @@ class CandidateForm(forms.ModelForm):
         #     self.fields[field].error_messages.update({"required": "Field required!"})
 
         # 4) FONT SIZE
-        font_size = [
+        # font_size = [
+        #     "firstname",
+        #     "lastname",
+        #     "job",
+        #     "age",
+        # ]
+        # for field in font_size:
+        #     self.fields[field].widget.attrs.update(
+        #         {
+        #             "style": "font-size: 18px;",
+        #         }
+        #     )
+
+        # 5) AUTO COMPLETE = OFF (Input History)
+        auto_complete = [
             "firstname",
             "lastname",
-            "job",
+            "email",
+            "phone",
             "age",
         ]
-        for field in font_size:
+        for field in auto_complete:
             self.fields[field].widget.attrs.update(
                 {
-                    "style": "font-size: 18px;",
+                    "autocomplete": "off",
                 }
             )
 
