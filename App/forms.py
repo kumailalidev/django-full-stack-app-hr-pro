@@ -274,11 +274,11 @@ class CandidateForm(forms.ModelForm):
         """
         Overrides all the other default error messages
         """
-        self.fields["firstname"].error_messages.update(
-            {
-                "required": "This is super function overridden error message",
-            }
-        )
+        # self.fields["firstname"].error_messages.update(
+        #     {
+        #         "required": "This is super function overridden error message",
+        #     }
+        # )
 
         # ========== ADVANCED CONTROL PANEL (Multiple Inputs) ==========
         # 1) READONLY
@@ -290,6 +290,23 @@ class CandidateForm(forms.ModelForm):
         # disabled = ["personality", "salary", "gender", "smoker", "experience"]
         # for field in disabled:
         #     self.fields[field].widget.attrs["disabled"] = "true"
+
+        # 3) ERROR MESSAGES
+        error_messages = [
+            "firstname",
+            "lastname",
+            "job",
+            "email",
+            "age",
+            "phone",
+            "personality",
+            "salary",
+            "gender",
+            "smoker",
+            "file",
+        ]
+        for field in error_messages:
+            self.fields[field].error_messages.update({"required": "Field required!"})
 
     # ______________________________________ END // SUPER FUNCTION ______________________________________
 
