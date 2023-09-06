@@ -103,5 +103,10 @@ class Candidate(models.Model):
         self.firstname = self.firstname.capitalize()
         self.lastname = self.lastname.capitalize()
 
+    # Concatenate F-name and L-name (Table)
+    def name(obj):
+        return "%s %s" % (obj.firstname, obj.lastname)
+
+    # Concatenate (when clicking over the candidates)
     def __str__(self):
-        return self.firstname
+        return self.firstname + " " + self.lastname

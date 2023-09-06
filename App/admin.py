@@ -31,8 +31,7 @@ class CandidateAdmin(admin.ModelAdmin):
     ]
     exclude = ["status"]
     list_display = [
-        "firstname",
-        "lastname",
+        "name",
         "job",
         "email",
         "age",
@@ -48,6 +47,14 @@ class CandidateAdmin(admin.ModelAdmin):
         "situation",
     ]
     list_per_page = 10
+
+    # Function to hide F-name and L-name (when clicking over the candidates)
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        if obj:
+            fields.remove("firstname")
+            fields.remove("lastname")
+        return fields
 
     # Function to change the icons
     def _(self, obj):
