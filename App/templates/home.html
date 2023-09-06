@@ -30,13 +30,13 @@
     Note:
         striptags is required otherwise it throws error in console.
     -->
-    {% if form.errors %}
+    <!-- {% if form.errors %}
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
             var m = "{{ form.email.errors|striptags }}";
             swal("Denied !", m, "error");
         </script>
-    {% endif %}
+    {% endif %} -->
 
     <!-- Message from backend (success - views.py) -->
     <div class="text-center">

@@ -344,10 +344,11 @@ class CandidateForm(forms.ModelForm):
 
     # ______________________________________ END // SUPER FUNCTION ______________________________________
 
-    # FUNCTION TO PREVENT DUPLICATE ENTRIES
+    # ====================================== FUNCTION (METHOD CLEAN) ======================================
+
+    # 1) FUNCTION TO PREVENT DUPLICATE ENTRIES
 
     # Method 1 (loop for)
-
     # def clean_email(self):
     #     email = self.cleaned_data.get("email")
     #     for obj in Candidate.objects.all():
@@ -365,3 +366,11 @@ class CandidateForm(forms.ModelForm):
                 "Denied! {} is already registered.".format(email)
             )
         return email
+
+    # 2) JOB CODE (Job Code Validation)
+    def clean_job(self):
+        job = self.cleaned_data.get("job")
+        if job == "FR-22" or job == "BA-10" or job == "FU-15":
+            return job
+        else:
+            raise forms.ValidationError("Denied! This code is invalid.")
