@@ -25,6 +25,9 @@ class CandidateForm(forms.ModelForm):
         min_length=3,
         max_length=50,
         # required=False,
+        error_messages={
+            "required": "First name cannot be empty.",
+        },
         validators=[
             RegexValidator(
                 r"^[a-zA-ZÀ-ÿ\s]*$",
@@ -106,6 +109,9 @@ class CandidateForm(forms.ModelForm):
         label="Your age",
         min_length=2,
         max_length=2,
+        error_messages={
+            "required": "Age field cannot be empty.",
+        },
         validators=[
             RegexValidator(
                 r"^[0-9]*$",
@@ -263,6 +269,16 @@ class CandidateForm(forms.ModelForm):
         #         "data-mask": "(00) 00-00",
         #     }
         # )
+
+        # 6) ERROR MESSAGES
+        """
+        Overrides all the other default error messages
+        """
+        self.fields["firstname"].error_messages.update(
+            {
+                "required": "This is super function overridden error message",
+            }
+        )
 
         # ========== ADVANCED CONTROL PANEL (Multiple Inputs) ==========
         # 1) READONLY
