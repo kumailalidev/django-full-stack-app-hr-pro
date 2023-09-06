@@ -13,19 +13,32 @@
         {% endfor %}
     {% endfor %} -->
 
-    <!-- 1) [INDIVIDUAL] Error messages from (forms.py) -->
-    {% if form.errors %}
-        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-            <strong>{{ form.email.errors|striptags }}</strong>
-            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endif %}
-
-    <!-- Message from backend (success - views.py) -->
+    <!-- 2) [INDIVIDUAL] Error messages from (forms.py) -->
     <!--
     Note:
         striptags: removes <li>
     -->
+    <!-- {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            <strong>{{ form.email.errors|striptags }}</strong>
+            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %} -->
+
+    <!-- 3) [OPTIONAL INDIVIDUAL (SweetAlert), But using JS] -->
+    <!--
+    Note:
+        striptags is required otherwise it throws error in console.
+    -->
+    {% if form.errors %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{ form.email.errors|striptags }}";
+            swal("Denied !", m, "error");
+        </script>
+    {% endif %}
+
+    <!-- Message from backend (success - views.py) -->
     <div class="text-center">
         {% for message in messages %}
             {% if message.tags == 'success' %}

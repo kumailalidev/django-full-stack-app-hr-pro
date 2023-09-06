@@ -81,6 +81,9 @@ class CandidateForm(forms.ModelForm):
         min_length=8,
         max_length=50,
         # required=False,
+        error_messages={
+            "required": "Email field cannot be empty.",
+        },
         validators=[
             RegexValidator(
                 r"^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$",
