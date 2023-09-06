@@ -374,3 +374,11 @@ class CandidateForm(forms.ModelForm):
             return job
         else:
             raise forms.ValidationError("Denied! This code is invalid.")
+
+    # 3) AGE (Range: 18 - 65)
+    def clean_age(self):
+        age = self.cleaned_data.get("age")
+        if age < "18" or age > "65":
+            raise forms.ValidationError("Denied! Age must be between 18 and 65")
+        else:
+            return age
