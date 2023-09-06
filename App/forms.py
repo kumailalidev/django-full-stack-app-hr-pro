@@ -71,6 +71,7 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 "placeholder": "Example: FR-22",
                 "style": "font-size: 13px; text-transform: uppercase;",
+                "data-mask": "AA-00",
             }
         ),
     )
