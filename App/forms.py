@@ -292,21 +292,21 @@ class CandidateForm(forms.ModelForm):
         #     self.fields[field].widget.attrs["disabled"] = "true"
 
         # 3) ERROR MESSAGES
-        error_messages = [
-            "firstname",
-            "lastname",
-            "job",
-            "email",
-            "age",
-            "phone",
-            "personality",
-            "salary",
-            "gender",
-            "smoker",
-            "file",
-        ]
-        for field in error_messages:
-            self.fields[field].error_messages.update({"required": "Field required!"})
+        # error_messages = [
+        #     "firstname",
+        #     "lastname",
+        #     "job",
+        #     "email",
+        #     "age",
+        #     "phone",
+        #     "personality",
+        #     "salary",
+        #     "gender",
+        #     "smoker",
+        #     "file",
+        # ]
+        # for field in error_messages:
+        #     self.fields[field].error_messages.update({"required": "Field required!"})
 
     # ______________________________________ END // SUPER FUNCTION ______________________________________
 
