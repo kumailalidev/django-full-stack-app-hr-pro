@@ -311,6 +311,20 @@ class CandidateForm(forms.ModelForm):
         # for field in error_messages:
         #     self.fields[field].error_messages.update({"required": "Field required!"})
 
+        # 4) FONT SIZE
+        font_size = [
+            "firstname",
+            "lastname",
+            "job",
+            "age",
+        ]
+        for field in font_size:
+            self.fields[field].widget.attrs.update(
+                {
+                    "style": "font-size: 18px;",
+                }
+            )
+
     # ______________________________________ END // SUPER FUNCTION ______________________________________
 
     # FUNCTION TO PREVENT DUPLICATE ENTRIES
