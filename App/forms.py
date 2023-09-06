@@ -328,19 +328,18 @@ class CandidateForm(forms.ModelForm):
         #     )
 
         # 5) AUTO COMPLETE = OFF (Input History)
-        auto_complete = [
-            "firstname",
-            "lastname",
-            "email",
-            "phone",
-            "age",
-        ]
-        for field in auto_complete:
-            self.fields[field].widget.attrs.update(
-                {
-                    "autocomplete": "off",
-                }
-            )
+        # auto_complete = [
+        #     "firstname",
+        #     "lastname",
+        #     "email",
+        #     "phone",
+        # ]
+        # for field in auto_complete:
+        #     self.fields[field].widget.attrs.update(
+        #         {
+        #             "autocomplete": "off",
+        #         }
+        #     )
 
     # ______________________________________ END // SUPER FUNCTION ______________________________________
 
