@@ -380,5 +380,15 @@ class CandidateForm(forms.ModelForm):
         age = self.cleaned_data.get("age")
         if age < "18" or age > "65":
             raise forms.ValidationError("Denied! Age must be between 18 and 65")
-        else:
-            return age
+        # else:
+        #     return age
+        return age
+
+    # 4) PHONE (Prevent incomplete values)
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone")
+        if len(phone) != 15:
+            raise forms.ValidationError("Phone field is incomplete")
+        # else:
+        #     return phone
+        return phone
