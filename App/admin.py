@@ -8,18 +8,24 @@ class CandidateAdmin(admin.ModelAdmin):
     form = CandidateForm
     radio_fields = {"smoker": admin.HORIZONTAL}  # REDUNDANT
     list_filter = ["situation"]
+    exclude = ["status"]
+    list_display = ["name", "job", "email", "created_at", "status", "_"]
+    search_fields = ["firstname", "lastname", "email", "situation"]
+    list_per_page = 10
     readonly_fields = [
+        "experience",
+        "gender",
         "firstname",
         "lastname",
         "job",
         "email",
         "phone",
         "salary",
+        "birth",
         "personality",
-        "gender",
         "smoker",
-        "experience",
         "file",
+        "image",
         "frameworks",
         "languages",
         "databases",
@@ -27,11 +33,21 @@ class CandidateAdmin(admin.ModelAdmin):
         "mobile",
         "others",
         "message",
+        "status_course",
+        "started_course",
+        "finished_course",
+        "course",
+        "institution",
+        "about_course",
+        "started_job",
+        "finished_job",
+        "company",
+        "position",
+        "about_job",
+        "employed",
+        "remote",
+        "travel",
     ]
-    exclude = ["status"]
-    list_display = ["name", "job", "email", "created_at", "status", "_"]
-    search_fields = ["firstname", "lastname", "email", "situation"]
-    list_per_page = 10
 
     # Function to hide F-name and L-name (when clicking over the candidates)
     def get_fields(self, request, obj=None):
