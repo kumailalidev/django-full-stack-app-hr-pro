@@ -55,7 +55,8 @@
         <!-- Card 1 (PERSONAL) -->
         <div class="card border-dark p-3">
             <span class="btn btn-secondary mb-4" style="cursor: default;">
-                Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15
+                <!-- Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15 -->
+                PERSONAL
             </span>
             <div class="row">
                 <div class="col-4">{{ form.firstname|as_crispy_field }}</div>
@@ -104,8 +105,11 @@
                 <div class="col-2">{{ form.finished_course|as_crispy_field }}</div>
             </div>
             {{ form.about_course|as_crispy_field }}
-            {{ form.status_course|as_crispy_field }}
+            <div class="row">
+                <div class="col-3">{{ form.status_course|as_crispy_field }}</div>
+            </div>
         </div>
+        <br>
         <!-- Card # 4 (PROFESSIONAL) -->
         <div class="card border-dark p-3">
             <span class="btn btn-secondary mb-4" style="cursor: default;">PROFESSIONAL</span>

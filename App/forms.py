@@ -147,21 +147,120 @@ class CandidateForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 "placeholder": "Talk a little about you",
-                "rows": 4,
+                "rows": 6,
                 "style": "font-size: 13px;",
             }
         ),
     )
 
-    # File
+    # File (Resume upload)
     file = forms.FileField(
+        label="Resume",
         required=True,
         widget=forms.ClearableFileInput(
             attrs={
                 "style": "font-size: 13px;",
+                "accept": "application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             }
         ),
     )
+
+    # Image (Upload photo)
+    image = forms.FileField(
+        label="Photo",
+        widget=forms.ClearableFileInput(
+            attrs={
+                "style": "font-size: 13px;",
+                # Allowed extensions
+                "accept": "image/png, image/jpeg",
+            }
+        ),
+    )
+
+    # Institution
+    institution = forms.CharField(
+        label="Institution",
+        min_length=3,
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                "style": "font-size: 13px;",
+                "placeholder": "Institution name",
+            }
+        ),
+    )
+
+    # College course
+    course = forms.CharField(
+        min_length=3,
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                "style": "font-size: 13px;",
+                "placeholder": "Your college course",
+            }
+        ),
+    )
+
+    # About college course
+    about_course = forms.CharField(
+        label="About your college course",
+        min_length=50,
+        max_length=1000,
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "Tell us about your college course",
+                "style": "font-size: 13px;",
+                "rows": 7,
+            }
+        ),
+    )
+
+    # About the Job
+    about_job = forms.CharField(
+        label="About your last job",
+        min_length=50,
+        max_length=1000,
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "Tell us a little about what you did at the company...",
+                "style": "font-size: 13px;",
+                "rows": 7,
+            }
+        ),
+    )
+
+    # Company
+    company = forms.CharField(
+        label="Last Company",
+        min_length=3,
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Company name",
+                "style": "font-size: 13px;",
+            }
+        ),
+    )
+
+    # Position
+    position = forms.CharField(
+        label="Last Company",
+        min_length=3,
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Your occupation",
+                "style": "font-size: 13px;",
+            }
+        ),
+    )
+
+    employed = forms.BooleanField(label="I am employed", required=False)
+    remote = forms.BooleanField(label="I agree to work remotely", required=False)
+    travel = forms.BooleanField(label="I'm available for travel", required=False)
 
     # Method # 01 (Gender) (Outside the Meta class)
     # GENDER = [
@@ -179,10 +278,13 @@ class CandidateForm(forms.ModelForm):
         # fields = "__all__"
         # fields = ["firstname", "lastname", "email", "age", "message",]
         # Labels Control
-        # labels = {
-        #     "gender": "Your Gender",
-        #     "smoker": "Do you smoke ?",
-        # }
+
+        labels = {
+            "started_course": "Started",
+            "finished_course": "Finished",
+            "started_job": "Started",
+            "finished_job": "Finished",
+        }
 
         # Native choice field
         SALARY = (
@@ -201,6 +303,50 @@ class CandidateForm(forms.ModelForm):
         widgets = {
             # Birthday
             "birth": forms.DateInput(
+                attrs={
+                    "style": "font-size: 13px; cursor: pointer;",
+                    "type": "date",
+                    # Block typing inside the input
+                    "onkeydown": "return false",
+                    "min": "1950-01-01",
+                    "max": "2030-01-01",
+                }
+            ),
+            # Started course
+            "started_course": forms.DateInput(
+                attrs={
+                    "style": "font-size: 13px; cursor: pointer;",
+                    "type": "date",
+                    # Block typing inside the input
+                    "onkeydown": "return false",
+                    "min": "1950-01-01",
+                    "max": "2030-01-01",
+                }
+            ),
+            # Finished Course
+            "finished_course": forms.DateInput(
+                attrs={
+                    "style": "font-size: 13px; cursor: pointer;",
+                    "type": "date",
+                    # Block typing inside the input
+                    "onkeydown": "return false",
+                    "min": "1950-01-01",
+                    "max": "2030-01-01",
+                }
+            ),
+            # Started Job
+            "started_job": forms.DateInput(
+                attrs={
+                    "style": "font-size: 13px; cursor: pointer;",
+                    "type": "date",
+                    # Block typing inside the input
+                    "onkeydown": "return false",
+                    "min": "1950-01-01",
+                    "max": "2030-01-01",
+                }
+            ),
+            # Finished Job
+            "finished_job": forms.DateInput(
                 attrs={
                     "style": "font-size: 13px; cursor: pointer;",
                     "type": "date",
@@ -243,6 +389,12 @@ class CandidateForm(forms.ModelForm):
             ),
             # Personality
             "personality": forms.Select(
+                attrs={
+                    "style": "font-size: 13px;",
+                }
+            ),
+            # Course Status
+            "status_course": forms.Select(
                 attrs={
                     "style": "font-size: 13px;",
                 }
