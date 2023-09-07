@@ -13,7 +13,6 @@ class CandidateAdmin(admin.ModelAdmin):
         "lastname",
         "job",
         "email",
-        "age",
         "phone",
         "salary",
         "personality",
@@ -30,8 +29,8 @@ class CandidateAdmin(admin.ModelAdmin):
         "message",
     ]
     exclude = ["status"]
-    list_display = ["name", "job", "email", "age", "created_at", "status", "_"]
-    search_fields = ["firstname", "lastname", "email", "age", "situation"]
+    list_display = ["name", "job", "email", "created_at", "status", "_"]
+    search_fields = ["firstname", "lastname", "email", "situation"]
     list_per_page = 10
 
     # Function to hide F-name and L-name (when clicking over the candidates)

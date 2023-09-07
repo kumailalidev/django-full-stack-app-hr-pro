@@ -110,27 +110,27 @@ class CandidateForm(forms.ModelForm):
     # )
 
     # Method 02 (Using Regex)
-    age = forms.CharField(
-        label="Your age",
-        min_length=2,
-        max_length=2,
-        error_messages={
-            "required": "Age field cannot be empty.",
-        },
-        validators=[
-            RegexValidator(
-                r"^[0-9]*$",
-                message="Only number is allowed",
-            )
-        ],
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Age",
-                "style": "font-size: 13px;",
-                # "autocomplete": "off",
-            }
-        ),
-    )
+    # age = forms.CharField(
+    #     label="Your age",
+    #     min_length=2,
+    #     max_length=2,
+    #     error_messages={
+    #         "required": "Age field cannot be empty.",
+    #     },
+    #     validators=[
+    #         RegexValidator(
+    #             r"^[0-9]*$",
+    #             message="Only number is allowed",
+    #         )
+    #     ],
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "placeholder": "Age",
+    #             "style": "font-size: 13px;",
+    #             # "autocomplete": "off",
+    #         }
+    #     ),
+    # )
 
     # Experience
     experience = forms.BooleanField(
@@ -199,6 +199,17 @@ class CandidateForm(forms.ModelForm):
 
         # Outside Widgets
         widgets = {
+            # Birthday
+            "birth": forms.DateInput(
+                attrs={
+                    "style": "font-size: 13px; cursor: pointer;",
+                    "type": "date",
+                    # Block typing inside the input
+                    "onkeydown": "return false",
+                    "min": "1950-01-01",
+                    "max": "2030-01-01",
+                }
+            ),
             # Phone field
             "phone": forms.TextInput(
                 attrs={
@@ -329,6 +340,8 @@ class CandidateForm(forms.ModelForm):
         #     )
 
         # 5) AUTO COMPLETE = OFF (Input History)
+        # NOTE: This also control fields inside admin panel, therefore auto_complete fields inside
+        #       admin panel should NOT be readonly
         # auto_complete = [
         #     "firstname",
         #     "lastname",

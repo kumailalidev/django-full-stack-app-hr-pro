@@ -76,7 +76,10 @@ class Candidate(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     job = models.CharField(max_length=5)
-    age = models.CharField(max_length=3)
+    # age = models.CharField(max_length=3)
+    birth = models.DateField(
+        auto_now=False, auto_now_add=False, verbose_name="Birthday"
+    )
     phone = models.CharField(max_length=25)
     personality = models.CharField(max_length=50, null=True, choices=PERSONALITY)
     salary = models.CharField(max_length=50)
