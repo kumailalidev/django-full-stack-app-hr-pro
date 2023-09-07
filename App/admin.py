@@ -49,6 +49,87 @@ class CandidateAdmin(admin.ModelAdmin):
         "travel",
     ]
 
+    # FIELDSET
+    fieldsets = [
+        # HR Operations
+        (
+            "HR OPERATIONS",
+            {
+                "fields": [
+                    "situation",
+                    "company_note",
+                ]
+            },
+        ),
+        (
+            "PERSONAL",
+            {
+                "fields": [
+                    "experience",
+                    "gender",
+                    "job",
+                    "email",
+                    "phone",
+                    "salary",
+                    "birth",
+                    "personality",
+                    "smoker",
+                    "file",
+                    "image",
+                    "message",
+                ]
+            },
+        ),
+        (
+            "SKILLS",
+            {
+                "fields": [
+                    "frameworks",
+                    "languages",
+                    "databases",
+                    "libraries",
+                    "mobile",
+                    "others",
+                ]
+            },
+        ),
+        (
+            "EDUCATIONAL",
+            {
+                "fields": [
+                    "status_course",
+                    "started_course",
+                    "finished_course",
+                    "institution",
+                    "course",
+                    "about_course",
+                ]
+            },
+        ),
+        (
+            "PROFESSIONAL",
+            {
+                "fields": [
+                    "started_job",
+                    "finished_job",
+                    "company",
+                    "position",
+                    "about_job",
+                ]
+            },
+        ),
+        (
+            "NOTE",
+            {
+                "fields": [
+                    "employed",
+                    "remote",
+                    "travel",
+                ]
+            },
+        ),
+    ]
+
     # Function to hide F-name and L-name (when clicking over the candidates)
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
