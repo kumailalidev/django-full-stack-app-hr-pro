@@ -71,8 +71,17 @@ OTHERS = (
     ("Others", "Others"),
 )
 
+# Education
+STATUS_COURSE = (
+    ("", "Select your status"),
+    ("I'm studying", "I' am studying"),
+    ("I took a break", "I took a break"),
+    ("Completed", "Completed"),
+)
+
 
 class Candidate(models.Model):
+    # PERSONAL (CARD 1)
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     job = models.CharField(max_length=5)
@@ -88,19 +97,36 @@ class Candidate(models.Model):
     smoker = models.CharField(max_length=10, choices=SMOKER, default="")
     email = models.EmailField(max_length=50)
     message = models.TextField()
-    file = models.FileField()
+    file = models.FileField(upload_to="resume", blank=True, verbose_name="Resume")
+    image = models.ImageField(upload_to="photo", blank=True, verbose_name="Photo")
     created_at = models.DateTimeField(auto_now_add=True)
     situation = models.CharField(
         max_length=50, null=True, choices=SITUATION, default="Pending"
     )
     company_note = models.TextField(blank=True)
-    # Multiple Checkboxes
+    # SKILLS (CARD 2)
     frameworks = MultiSelectField(choices=FRAMEWORKS, default="")
     languages = MultiSelectField(choices=LANGUAGES, default="")
     databases = MultiSelectField(choices=DATABASES, default="")
     libraries = MultiSelectField(choices=LIBRARIES, default="")
     mobile = MultiSelectField(choices=MOBILE, default="")
     others = MultiSelectField(choices=OTHERS, default="")
+    # EDUCATIONAL (CARD 3)
+    institution = models.CharField(max_length=50)
+    course = models.CharField(max_length=50)
+    started_course = models.DateField(auto_now=False, auto_now_add=False)
+    finished_course = models.DateField(auto_now=False, auto_now_add=False)
+    about_course = models.TextField()
+    status_course = models.CharField(max_length=50, null=True, choices=STATUS_COURSE)
+    # PROFESSIONAL (CARD 3)
+    company = models.CharField(max_length=50)
+    position = models.CharField(max_length=50)
+    started_job = models.DateField(auto_now=False, auto_now_add=False)
+    finished_job = models.DateField(auto_now=False, auto_now_add=False)
+    about_job = models.TextField()
+    employed = models.BooleanField(null=True, verbose_name="I am employed")
+    remote = models.BooleanField(null=True, verbose_name="I agree to work remotely")
+    travel = models.BooleanField(null=True, verbose_name="I'm available for travel")
 
     # Capitalize (F-name and L-name)
     def clean(self):
