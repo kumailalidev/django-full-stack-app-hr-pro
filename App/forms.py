@@ -2,6 +2,8 @@ from django import forms
 from .models import Candidate, SMOKER
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
+from datetime import date  # Used in Birthdate
+import datetime  # Used to prevent future dates
 
 
 # Every letters to lowercase
@@ -156,11 +158,12 @@ class CandidateForm(forms.ModelForm):
     # File (Resume upload)
     file = forms.FileField(
         label="Resume",
-        required=True,
+        # required=False,
         widget=forms.ClearableFileInput(
             attrs={
                 "style": "font-size: 13px;",
-                "accept": "application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                # Method # 01
+                # "accept": "application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             }
         ),
     )
@@ -541,13 +544,13 @@ class CandidateForm(forms.ModelForm):
             raise forms.ValidationError("Denied! This code is invalid.")
 
     # 3) AGE (Range: 18 - 65)
-    def clean_age(self):
-        age = self.cleaned_data.get("age")
-        if age < "18" or age > "65":
-            raise forms.ValidationError("Denied! Age must be between 18 and 65")
-        # else:
-        #     return age
-        return age
+    # def clean_age(self):
+    #     age = self.cleaned_data.get("age")
+    #     if age < "18" or age > "65":
+    #         raise forms.ValidationError("Denied! Age must be between 18 and 65")
+    #     # else:
+    #     #     return age
+    #     return age
 
     # 4) PHONE (Prevent incomplete values)
     def clean_phone(self):
@@ -557,3 +560,95 @@ class CandidateForm(forms.ModelForm):
         # else:
         #     return phone
         return phone
+
+    # 5) RESTRICTION (file extensions - Method 2 via function)
+    # Method 2
+    # def clean_file(self):
+    #     file = self.cleaned_data["file"]
+    #     content_type = file.content_type
+    #     if content_type == "application/pdf" or content_type == "application/msword":
+    #         return file
+    #     else:
+    #         raise forms.ValidationError("Only: PDF - DOC - DOCX")
+
+    # Method 3
+    def clean_file(self):
+        # Get data
+        file = self.cleaned_data.get("file", False)
+        # Variables
+        EXT = ["pdf", "doc", "docx"]
+        ext = str(file).split(".")[-1]
+        type = ext.lower()
+        # Statement
+        # a) Accept only pdf - doc - docx
+        if type not in EXT:
+            raise forms.ValidationError("Only: PDF - DOC - DOCX")
+        # b) Prevent upload more than 2MB
+        if file.size > 2 * 1048476:
+            raise forms.ValidationError("Denied: Maximum allowed is 2mb")
+        return file
+
+    # Method 3 (When required is set to False)
+    # def clean_file(self):
+    #     # Get data
+    #     file = self.cleaned_data.get("file", False)
+    #     if file is not None:
+    #         # Variables
+    #         EXT = ["pdf", "doc", "docx"]
+    #         ext = str(file).split(".")[-1]
+    #         type = ext.lower()
+    #         # Statement
+    #         # a) Accept only pdf - doc - docx
+    #         if type not in EXT:
+    #             raise forms.ValidationError("Only: PDF - DOC - DOCX")
+    #         # b) Prevent upload more than 2MB
+    #         if file.size > 2 * 1048476:
+    #             raise forms.ValidationError("Denied: Maximum allowed is 2mb")
+    #         return file
+
+    # 6) IMAGE (Maximum upload size = 2mb)
+    def clean_image(self):
+        image = self.cleaned_data.get("image")
+        if image.size > 2 * 1048476:
+            raise forms.ValidationError("Denied: Maximum allowed is 2mb")
+        return image
+
+    # 7) BIRTHDAY (Rage: 18 and 65)
+    def clean_birth(self):
+        birth = self.cleaned_data.get("birth")
+        # Variables
+        b = birth
+        now = date.today()
+        age = (now.year - b.year) - ((now.month, now.day) < (b.month, b.day))
+        print(age)
+        # Statement
+        if age < 18 or age > 65:
+            raise forms.ValidationError("Denied: Age must be between 18 and 65")
+        return birth
+
+    # 8) Prevent FUTURES dates (card 3 and card 4)
+    # A) College
+    def clean_started_course(self):
+        started_course = self.cleaned_data["started_course"]
+        if started_course > datetime.date.today():
+            raise forms.ValidationError("Future dates is invalid")
+        return started_course
+
+    def clean_finished_course(self):
+        finished_course = self.cleaned_data["finished_course"]
+        if finished_course > datetime.date.today():
+            raise forms.ValidationError("Future dates is invalid")
+        return finished_course
+
+    # B) JOB
+    def clean_started_job(self):
+        started_job = self.cleaned_data["started_job"]
+        if started_job > datetime.date.today():
+            raise forms.ValidationError("Future dates is invalid")
+        return started_job
+
+    def clean_finished_job(self):
+        finished_job = self.cleaned_data["finished_job"]
+        if finished_job > datetime.date.today():
+            raise forms.ValidationError("Future dates is invalid")
+        return finished_job
