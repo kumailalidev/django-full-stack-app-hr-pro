@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+<!-- Block title -->
+{% block title %}Login{% endblock title %}
+
+<!-- Block navbar -->
+{% block nav-content %}
+    <i class="fas fa-user-plus"></i>&nbsp;&nbsp; LOGIN
+{% endblock nav-content %}
+
 <!-- Page content -->
 {% block content %}
     <div class="container card p-3 border-dark mt-5" style="width: 30%;">
