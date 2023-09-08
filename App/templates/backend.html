@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+<!-- Block title -->
+{% block title %}All Candidates{% endblock title %}
+
+<!-- Block navbar -->
+{% block navbar %} bg-warning {% endblock navbar %}
+{% block nav-content %}
+    <span class="text-dark"><i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADMINISTRATION</span>
+{% endblock nav-content %}
+
 <!-- Page content -->
 {% block content %}
 <div class="container" style="width: 90%; font-size: 14px;">
@@ -38,6 +47,8 @@
                         <i class="fas fa-user-alt"></i>
                     </a>
                 </td>
+                {% empty %}
+                <td colspan="6" class="text-danger"><strong>No records found</strong></td>
             </tr>
             {% endfor %}
         </tbody>
