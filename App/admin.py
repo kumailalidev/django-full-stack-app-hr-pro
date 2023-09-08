@@ -23,7 +23,7 @@ class CandidateAdmin(admin.ModelAdmin):
         "salary",
         "birth",
         "personality",
-        "smoker",
+        # "smoker",
         "file",
         "image",
         "frameworks",

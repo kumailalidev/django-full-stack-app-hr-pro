@@ -28,7 +28,11 @@
                 <td>{{ data.email }}</td>
                 <td>{{ data.phone }}</td>
                 <td>{{ data.gender }}</td>
-                <td>{{ data.smoker }}</td>
+                {% if data.smoker == "1" %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
                 <td class="bg-secondary">
                     <a href="{% url 'candidate' data.id %}" class="btn btn-outline-secondary btn-sm text-light">
                         <i class="fas fa-user-alt"></i>
