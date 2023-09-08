@@ -558,6 +558,8 @@ class CandidateForm(forms.ModelForm):
         # for field in array:
         #     if instance and instance.pk:
         #         self.fields[field].disabled = True
+        #         self.fields['file'].widget.attrs.update({"style": "display: none;"})
+        #         self.fields['image'].widget.attrs.update({"style": "display: none;"})
 
     # ______________________________________ END // SUPER FUNCTION ______________________________________
 

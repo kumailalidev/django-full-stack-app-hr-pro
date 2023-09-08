@@ -47,5 +47,46 @@ def backend(request):
 def candidate(request, id):
     data = Candidate.objects.get(pk=id)
     form = CandidateForm(instance=data)
+    array = [
+        "experience",
+        "gender",
+        "firstname",
+        "lastname",
+        "job",
+        "email",
+        "phone",
+        "salary",
+        "birth",
+        "personality",
+        "smoker",
+        "file",
+        "image",
+        "frameworks",
+        "languages",
+        "databases",
+        "libraries",
+        "mobile",
+        "others",
+        "message",
+        "status_course",
+        "started_course",
+        "finished_course",
+        "course",
+        "institution",
+        "about_course",
+        "started_job",
+        "finished_job",
+        "company",
+        "position",
+        "about_job",
+        "employed",
+        "remote",
+        "travel",
+    ]
+    for field in array:
+        form.fields[field].disabled = True
+        form.fields["file"].widget.attrs.update({"style": "display: none;"})
+        form.fields["image"].widget.attrs.update({"style": "display: none;"})
+
     context = {"form": form}
     return render(request, "candidate.html", context)
