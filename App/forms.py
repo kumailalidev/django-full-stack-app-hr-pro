@@ -405,8 +405,15 @@ class CandidateForm(forms.ModelForm):
         }
 
     # SUPER FUNCTION
+    # Notes
+    #     - Super function controls all the inputs inside frontend, backend and admin
     def __init__(self, *args, **kwargs):
         super(CandidateForm, self).__init__(*args, **kwargs)
+
+        # Disable inputs (By ID/PK)
+        # instance = getattr(self, "instance", None)
+        # if instance and instance.pk:
+        #     self.fields["firstname"].disabled = True
 
         # ========== CONTROL PANEL (Individual Inputs) ==========
 
@@ -509,6 +516,48 @@ class CandidateForm(forms.ModelForm):
         #             "autocomplete": "off",
         #         }
         #     )
+
+        # 6) DISABLE ALL INPUTS (By ID/PK)
+        # instance = getattr(self, "instance", None)
+        # array = [
+        #     "experience",
+        #     "gender",
+        #     "firstname",
+        #     "lastname",
+        #     "job",
+        #     "email",
+        #     "phone",
+        #     "salary",
+        #     "birth",
+        #     "personality",
+        #     "smoker",
+        #     "file",
+        #     "image",
+        #     "frameworks",
+        #     "languages",
+        #     "databases",
+        #     "libraries",
+        #     "mobile",
+        #     "others",
+        #     "message",
+        #     "status_course",
+        #     "started_course",
+        #     "finished_course",
+        #     "course",
+        #     "institution",
+        #     "about_course",
+        #     "started_job",
+        #     "finished_job",
+        #     "company",
+        #     "position",
+        #     "about_job",
+        #     "employed",
+        #     "remote",
+        #     "travel",
+        # ]
+        # for field in array:
+        #     if instance and instance.pk:
+        #         self.fields[field].disabled = True
 
     # ______________________________________ END // SUPER FUNCTION ______________________________________
 
