@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+<!-- Page content -->
+{% block content %}
+<div class="container" style="width: 90%; font-size: 14px;">
+    <!-- Button -->
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-3 mb-3 my-btn">Log out</a>
+
+    <!-- Header -->
+    <h6 class="card p-2 bg-secondary text-light text-center mb-3">LIST OF CANDIDATES</h6>
+
+    <!-- Table -->
+    <table class="table table-bordered text-center">
+        <thead class="table-secondary">
+            <tr>
+                <th style="width: 30%;">Name</th>
+                <th style="width: 20%;">Email</th>
+                <th style="width: 23%;">Phone</th>
+                <th style="width: 7%;">Gender</th>
+                <th style="width: 15%;">Smoker</th>
+                <th colspan="2" style="width: 5%;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in data_read %}
+            <tr>
+                <td>{{ data.firstname }} {{ data.lastname }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.phone }}</td>
+                <td>{{ data.gender }}</td>
+                <td>{{ data.smoker }}</td>
+                <td class="bg-secondary">
+                    <a href="{% url 'candidate' data.id %}" class="btn btn-outline-secondary btn-sm text-light">
+                        <i class="fas fa-user-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
