@@ -6,6 +6,8 @@ body {
   /* overflow: hidden; */
 }
 
+/* FOOTER */
+
 /* Keep the footer always down */
 .wrapper {
   min-height: 100%;
@@ -14,4 +16,10 @@ body {
 #footer,
 .push {
   height: 50px;
+}
+
+/* OTHERS */
+/* All buttons (width) */
+.my-btn {
+  width: 90px;
 }
