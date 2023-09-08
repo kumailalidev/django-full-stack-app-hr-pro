@@ -23,3 +23,13 @@ body {
 .my-btn {
   width: 90px;
 }
+
+/* Remove lines in all <a> tags */
+a {
+  text-decoration: none;
+}
+/* Upload field boxes (file and image) */
+.text-break,
+.input-group-text {
+  font-size: 13px !important;
+}
