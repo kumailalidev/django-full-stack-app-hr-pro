@@ -21,9 +21,11 @@
 <body>
     <div class="wrapper">
       <header>
-        <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-primary {% endblock %}">
+        <nav  class="navbar navbar-expand-lg navbar-dark navbar-sm {% block navbar %} bg-dark {% endblock %}">
           <a class="navbar-brand flex-grow-1 text-center small-title" style="color: #fff; left: 50%; transform: translateX(-50%); position: relative;">
-            <i class="fas fa-user-plus"></i>&nbsp;&nbsp; DEVELOPER REGISTRATION
+            {% block nav-content %}
+              <i class="fab fa-python f-size"></i>&nbsp;&nbsp; <strong>FORMS.PY</strong> | <span style="text-decoration: underline;">CRASH COURSE</span> (w/ Crispy forms 2022)
+            {% endblock nav-content %}
           </a>
         </nav>
       </header>
