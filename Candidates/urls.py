@@ -20,6 +20,10 @@ from App import views
 from Candidates import settings
 from django.conf.urls.static import static
 
+# Admin Panel (replace header and title)
+admin.site.site_header = "HR ADMIN"
+admin.site.index_title = "Table of Candidates"
+
 urlpatterns = [
     # Admin
     path("admin/", admin.site.urls),
