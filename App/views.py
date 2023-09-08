@@ -46,6 +46,6 @@ def backend(request):
 @login_required(login_url="login")
 def candidate(request, id):
     data = Candidate.objects.get(pk=id)
-    form = CandidateForm(isinstance=data)
+    form = CandidateForm(instance=data)
     context = {"form": form}
     return render(request, "candidate.html", context)
