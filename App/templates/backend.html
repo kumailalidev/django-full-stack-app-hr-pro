@@ -22,11 +22,12 @@
     <table class="table table-bordered text-center">
         <thead class="table-secondary">
             <tr>
-                <th style="width: 30%;">Name</th>
-                <th style="width: 20%;">Email</th>
-                <th style="width: 23%;">Phone</th>
-                <th style="width: 7%;">Gender</th>
-                <th style="width: 15%;">Smoker</th>
+                <th style="width: 21%;">Name</th>
+                <th style="width: 21%;">Email</th>
+                <th style="width: 20%;">Phone</th>
+                <th style="width: 11%;">Gender</th>
+                <th style="width: 11%;">Occupation</th>
+                <th style="width: 11%;">Experience</th>
                 <th colspan="2" style="width: 5%;">Action</th>
             </tr>
         </thead>
@@ -37,11 +38,30 @@
                 <td>{{ data.email }}</td>
                 <td>{{ data.phone }}</td>
                 <td>{{ data.gender }}</td>
+
+                <!-- Statement to Occupation -->
+                {% if data.job == "FR-22" %}
+                    <td>Frontend</td>
+                {% elif data.job == "BA-10" %}
+                    <td>Backend</td>
+                {% else %}
+                    <td>Fullstack</td>
+                {% endif %}
+
+                <!-- Statement to Experience -->
+                {% if data.experience == False %}
+                    <td class="text-danger">No</td>    
+                {% else %}
+                    <td>Yes</td>
+                {% endif %}
+
+                <!--
                 {% if data.smoker == "1" %}
                     <td>Yes</td>
                 {% else %}
                     <td>No</td>
                 {% endif %}
+                -->
                 <td class="bg-secondary">
                     <a href="{% url 'candidate' data.id %}" class="btn btn-outline-secondary btn-sm text-light">
                         <i class="fas fa-user-alt"></i>
