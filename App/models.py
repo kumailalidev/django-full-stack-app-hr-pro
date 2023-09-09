@@ -74,7 +74,7 @@ OTHERS = (
 # Education
 STATUS_COURSE = (
     ("", "Select your status"),
-    ("I'm studying", "I' am studying"),
+    ("I'm studying", "I'm studying"),
     ("I took a break", "I took a break"),
     ("Completed", "Completed"),
 )

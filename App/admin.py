@@ -14,7 +14,7 @@ class CandidateAdmin(admin.ModelAdmin):
     list_per_page = 10
     readonly_fields = [
         "experience",
-        "gender",
+        # "gender",
         "firstname",
         "lastname",
         "job",
@@ -23,7 +23,7 @@ class CandidateAdmin(admin.ModelAdmin):
         "salary",
         "birth",
         "personality",
-        # "smoker",
+        "smoker",
         "file",
         "image",
         "frameworks",

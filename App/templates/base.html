@@ -38,7 +38,7 @@
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           &copy; {% now "Y" %} Copyright:
           <a class="text-light" href="#" style="text-decoration: none;">
-              <span style="color: #89cff0;">www.your-website.com</span>
+              <span {% block footer %} style="color: #89cff0;" {% endblock footer %}>www.your-website.com</span>
           </a>
       </div>
     </footer>
