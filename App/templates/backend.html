@@ -22,12 +22,13 @@
     <table class="table table-bordered text-center">
         <thead class="table-secondary">
             <tr>
-                <th style="width: 21%;">Name</th>
-                <th style="width: 21%;">Email</th>
-                <th style="width: 20%;">Phone</th>
-                <th style="width: 11%;">Gender</th>
-                <th style="width: 11%;">Occupation</th>
-                <th style="width: 11%;">Experience</th>
+                <th style="width: 19%;">Name</th>
+                <th style="width: 19%;">Email</th>
+                <th style="width: 14%;">Phone</th>
+                <th style="width: 8%;">Gender</th>
+                <th style="width: 10%;">Occupation</th>
+                <th style="width: 10%;">Experience</th>
+                <th style="width: 15%;">Received</th>
                 <th colspan="2" style="width: 5%;">Action</th>
             </tr>
         </thead>
@@ -54,6 +55,8 @@
                 {% else %}
                     <td>Yes</td>
                 {% endif %}
+
+                <td>{{ data.created_at|date:"m/d/Y (H:i)" }}</td>
 
                 <!--
                 {% if data.smoker == "1" %}
