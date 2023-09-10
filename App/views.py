@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from django.core.paginator import Paginator
 
 
 # FRONTEND
@@ -30,15 +31,18 @@ def register(request):
 
 
 # BACKEND
-
-
 # HR - Home page (backend)
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def backend(request):
+    all_candidates_list = Candidate.objects.all().order_by("-created_at")
+    paginator = Paginator(all_candidates_list, 10)
+    page = request.GET.get("page")
+    all_candidate = paginator.get_page(page)
     context = {
-        "data_read": Candidate.objects.all(),
+        "candidates": all_candidate,
     }
+
     return render(request, "backend.html", context)
 
 
