@@ -40,7 +40,15 @@ def register(request):
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def backend(request):
-    if "q" in request.GET:
+    # Filter (individual)
+    if request.method == "POST":
+        job = request.POST.get("job")
+        filter = Candidate.objects.filter(job=job)
+        context = {"candidates": filter}
+        return render(request, "backend.html", context)  # NOTE: Breaks pagination
+
+    # Global search
+    elif "q" in request.GET:
         q = request.GET["q"]
         all_candidate_list = (
             Candidate.objects.annotate(name=Concat("firstname", P(" "), "lastname"))
