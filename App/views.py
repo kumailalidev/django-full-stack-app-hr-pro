@@ -8,6 +8,10 @@ from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator
 from django.db.models import Q
 
+# Concatenate (F-name and L-name)
+from django.db.models.functions import Concat  # Concatenate
+from django.db.models import Value as P  # (P = Plus)
+
 
 # FRONTEND
 # Home
@@ -38,12 +42,17 @@ def register(request):
 def backend(request):
     if "q" in request.GET:
         q = request.GET["q"]
-        all_candidate_list = Candidate.objects.filter(
-            Q(firstname__icontains=q)
-            | Q(lastname__icontains=q)
-            | Q(email__icontains=q)
-            | Q(phone__icontains=q)
-        ).order_by("-created_at")
+        all_candidate_list = (
+            Candidate.objects.annotate(name=Concat("firstname", P(" "), "lastname"))
+            .filter(
+                Q(name__icontains=q)
+                | Q(firstname__icontains=q)
+                | Q(lastname__icontains=q)
+                | Q(email__icontains=q)
+                | Q(phone__icontains=q)
+            )
+            .order_by("-created_at")
+        )
     else:
         all_candidate_list = Candidate.objects.all().order_by("-created_at")
 
