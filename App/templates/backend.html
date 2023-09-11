@@ -25,7 +25,7 @@
         <hr class="text-light">
         <!-- Global search navbar -->
         <form action="" class="d-flex">
-            <input class="form-control me-1" name="q" type="search" placeholder="Global Search">
+            <input class="form-control me-1" name="q" type="search" placeholder="Global Search" value="{{ request.GET.q }}">
             <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
                 <i class="fas fa-search"></i>
             </button>
@@ -44,10 +44,10 @@
     <!-- <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-3 mb-3 my-btn">Log out</a> -->
 
     <!-- Header -->
-    <h6 class="card p-2 bg-secondary text-light text-center mb-3">LIST OF CANDIDATES</h6>
+    <!-- <h6 class="card p-2 bg-secondary text-light text-center mb-3">LIST OF CANDIDATES</h6> -->
 
     <!-- Table -->
-    <table class="table table-bordered text-center">
+    <table class="table table-bordered text-center mt-5">
         <thead class="table-secondary">
             <tr>
                 <th style="width: 19%;">Name</th>
@@ -99,7 +99,7 @@
                     </a>
                 </td>
                 {% empty %}
-                <td colspan="6" class="text-danger"><strong>No records found</strong></td>
+                <td colspan="8" class="text-danger"><strong>No records found</strong></td>
             </tr>
             {% endfor %}
         </tbody>
