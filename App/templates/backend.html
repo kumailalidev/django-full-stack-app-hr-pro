@@ -92,28 +92,28 @@
         <tbody style="font-size: 14px;">
             {% for data in candidates %}
             <tr>
-                <td>{{ data.firstname }} {{ data.lastname }}</td>
-                <td>{{ data.email }}</td>
-                <td>{{ data.phone }}</td>
-                <td>{{ data.gender }}</td>
+                <td id="top-border" label="Name">{{ data.firstname }} {{ data.lastname }}</td>
+                <td id="sm-border" label="Email">{{ data.email }}</td>
+                <td id="sm-border" label="Phone">{{ data.phone }}</td>
+                <td id="sm-border" label="Gender">{{ data.gender }}</td>
 
                 <!-- Statement to Occupation -->
                 {% if data.job == "FR-22" %}
-                    <td>Frontend</td>
+                    <td id="sm-border" label="Occupation">Frontend</td>
                 {% elif data.job == "BA-10" %}
-                    <td>Backend</td>
+                    <td id="sm-border" label="Occupation">Backend</td>
                 {% else %}
-                    <td>Fullstack</td>
+                    <td id="sm-border" label="Occupation">Fullstack</td>
                 {% endif %}
 
                 <!-- Statement to Experience -->
                 {% if data.experience == False %}
-                    <td class="text-danger">No</td>    
+                    <td id="sm-border" label="Experience"><span class="text-danger">No</span></td>    
                 {% else %}
-                    <td>Yes</td>
+                    <td id="sm-border" label="Experience">Yes</td>
                 {% endif %}
 
-                <td>{{ data.created_at|date:"m/d/Y (H:i)" }}</td>
+                <td id="sm-border" label="Received">{{ data.created_at|date:"m/d/Y (H:i)" }}</td>
 
                 <!--
                 {% if data.smoker == "1" %}
@@ -159,5 +159,7 @@
         </ul>
         {% endif %}
     </nav>
+    <br><br><br>
 </div>
+
 {% endblock %}
