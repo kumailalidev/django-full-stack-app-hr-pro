@@ -23,7 +23,9 @@ body {
 .my-btn {
   width: 90px;
 }
-
+.my-btn2 {
+  width: 45px;
+}
 /* Remove lines in all <a> tags */
 a {
   text-decoration: none;
@@ -37,6 +39,9 @@ a {
 /* FontAwesome font-size */
 .f-size {
   font-size: 26px;
+}
+.f-size2 {
+  font-size: 20px;
 }
 
 /* Pagination (Grey) */

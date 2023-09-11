@@ -4,16 +4,44 @@
 {% block title %}All Candidates{% endblock title %}
 
 <!-- Block navbar -->
-{% block navbar %} bg-warning {% endblock navbar %}
 {% block nav-content %}
-    <span class="text-dark"><i class="fas fa-user-plus"></i>&nbsp;&nbsp; ADMINISTRATION</span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse mt-3 mt-md-3 mt-lg-0" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-middle">
+            <li class="nav-item">
+                <a href="#" class="btn btn-light my-btn2" title="Control Panel">
+                    <i class="fas fa-user-cog f-size2"></i>
+                </a>
+                <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-warning my-btn2" title="Admin">
+                    <i class="fas fa-cog f-size2"></i>
+                </a>
+                <a href="{% url 'logout' %}" class="btn btn-danger my-btn2" title="Logout">
+                    <i class="fas fa-power-off f-size2"></i>
+                </a>
+            </li>
+        </ul>
+        <hr class="text-light">
+        <!-- Global search navbar -->
+        <form action="" class="d-flex">
+            <input class="form-control me-1" name="q" type="search" placeholder="Global Search">
+            <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+            <a href="{% url 'backend' %}" class="btn btn-secondary ms-1" title="Refresh">
+                <i class="fas fa-sync-alt"></i>
+            </a>
+        </form>
+        <hr class="text-light">
+    </div>
 {% endblock nav-content %}
 
 <!-- Page content -->
 {% block content %}
 <div class="container" style="width: 90%;">
     <!-- Button -->
-    <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-3 mb-3 my-btn">Log out</a>
+    <!-- <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-3 mb-3 my-btn">Log out</a> -->
 
     <!-- Header -->
     <h6 class="card p-2 bg-secondary text-light text-center mb-3">LIST OF CANDIDATES</h6>
