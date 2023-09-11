@@ -23,7 +23,7 @@
             </li>
         </ul>
         <hr class="text-light">
-        <!-- Global search navbar -->
+        <!-- Global search navbar (method not required) -->
         <form action="" class="d-flex">
             <input class="form-control me-1" name="q" type="search" placeholder="Global Search" value="{{ request.GET.q }}">
             <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
@@ -46,8 +46,36 @@
     <!-- Header -->
     <!-- <h6 class="card p-2 bg-secondary text-light text-center mb-3">LIST OF CANDIDATES</h6> -->
 
+    <!-- Filter (Using native Django filters) -->
+    <form method="POST" class="mt-5 mb-2">
+        <div class="btn-group wd-100" role="group" aria-label="Basic radio toggle button group">
+            <!-- Occupation -->
+            <input type="radio" class="btn-check" value="FR-22" name="job" id="btnradio1" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="btnradio1">FR-22</label>
+
+            <input type="radio" class="btn-check" value="BA-10" name="job" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="btnradio2">BA-10</label>
+
+            <input type="radio" class="btn-check" value="FU-15" name="job" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="btnradio3">FU-15</label>
+            &nbsp; &nbsp;
+
+            <!-- Gender -->
+            <input type="radio" class="btn-check" value="BA-10" name="gender" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-secondary my-btn2" for="btnradio2">M</label>
+
+            <input type="radio" class="btn-check" value="FU-15" name="gender" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-secondary my-btn2" for="btnradio3">F</label>
+            &nbsp; &nbsp;
+            
+            <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+
     <!-- Table -->
-    <table class="table table-bordered text-center mt-5">
+    <table class="table table-bordered text-center">
         <thead class="table-secondary">
             <tr>
                 <th style="width: 19%;">Name</th>
@@ -93,8 +121,8 @@
                     <td>No</td>
                 {% endif %}
                 -->
-                <td class="bg-secondary">
-                    <a href="{% url 'candidate' data.id %}" class="btn btn-outline-secondary btn-sm text-light">
+                <td>
+                    <a href="{% url 'candidate' data.id %}" class="btn btn-secondary mt-btn2 btn-sm" title="View candidate">
                         <i class="fas fa-user-alt"></i>
                     </a>
                 </td>
