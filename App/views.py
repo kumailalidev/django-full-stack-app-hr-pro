@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from .forms import CandidateForm
 from .models import Candidate
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator
 from django.db.models import Q
+import pdfkit
 
 # Concatenate (F-name and L-name)
 from django.db.models.functions import Concat  # Concatenate
@@ -134,3 +135,32 @@ def candidate(request, id):
 
     candidate = Candidate.objects.get(pk=id)
     return render(request, "candidate.html", {"candidate": candidate})
+
+
+# EXPORT TO PDF
+# Method 1 (Simple)
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def index(request, id):
+    c = Candidate.objects.get(pk=id)
+    cookies = request.COOKIES
+    options = {
+        "page-size": "Letter",
+        "encoding": "UTF-8",
+        # Without cookies login page will be printed
+        "cookie": [
+            ("csrftoken", cookies["csrftoken"]),
+            ("sessionid", cookies["sessionid"]),
+        ],
+    }
+    path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    pdf = pdfkit.from_url(
+        "http://localhost:8000/" + str(c.id),
+        False,
+        options=options,
+        configuration=config,
+    )
+    response = HttpResponse(pdf, content_type="application/pdf")
+    response["Content-disposition"] = "attachment; filename=candidate.pdf"
+    return response

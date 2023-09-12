@@ -132,6 +132,7 @@
     {% endif %}
     <hr>
     <a href="{% url 'backend' %}" class="btn btn-secondary mt-3 mb-3">All Candidates</a>
+    <a href="{% url 'index' candidate.id %}" class="btn btn-warning mt-3 mb-3">Export to PDF</a>
 </div>
 <br><br><br>
 {% endblock content %}
