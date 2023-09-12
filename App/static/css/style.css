@@ -43,6 +43,12 @@ a {
 .f-size2 {
   font-size: 20px;
 }
+/* Put the navbar content centered */
+.to_center {
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+}
 
 /* Pagination (Grey) */
 .page-item.active .page-link {
