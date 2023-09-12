@@ -23,11 +23,11 @@
         </a>
         <!-- Filter -->
         <span class="text-light">&nbsp;|&nbsp;</span>
-        <button class="btn my-btn2" style="background-color: #a8b8d0;" title="Filter">
+        <button class="btn my-btn2" style="background-color: #a8b8d0;" title="Filter" data-bs-toggle="modal" data-bs-target="#filterModal">
             <i class="fas fa-filter"></i>
         </button>
         <!-- Search -->
-        <button class="btn my-btn2 ms-1" style="background-color: #d3d3d3;" title="Search">
+        <button class="btn my-btn2 ms-1" style="background-color: #d3d3d3;" title="Search" data-bs-toggle="modal" data-bs-target="#searchModal">
             <i class="fas fa-search"></i>
         </button>
         <!-- Refresh -->
@@ -36,7 +36,7 @@
         </a>
         <span class="text-light">&nbsp;|&nbsp;</span>
         <!-- Logout -->
-        <a href="{% url 'logout' %}" class="btn btn-danger my-btn2" title="Logout">
+        <a href="{% url 'logout' %}" class="btn btn-danger my-btn2" title="Logout" data-bs-toggle="modal" data-bs-target="#logoutModal">
             <i class="fas fa-power-off f-size2"></i>
         </a>
         </li>
