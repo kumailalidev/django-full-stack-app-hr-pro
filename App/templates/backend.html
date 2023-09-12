@@ -10,21 +10,40 @@
     </button>
     <div class="collapse navbar-collapse mt-3 mt-md-3 mt-lg-0" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-middle">
-            <li class="nav-item">
-                <a href="#" class="btn btn-light my-btn2" title="Control Panel">
-                    <i class="fas fa-user-cog f-size2"></i>
-                </a>
-                <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-warning my-btn2" title="Admin">
-                    <i class="fas fa-cog f-size2"></i>
-                </a>
-                <a href="{% url 'logout' %}" class="btn btn-danger my-btn2" title="Logout">
-                    <i class="fas fa-power-off f-size2"></i>
-                </a>
-            </li>
+            <li class="nav-item text-light">Welcome: <span class="text-warning">{{ user.get_username }}</span></li>
         </ul>
+        <!-- Al buttons on navbar (Right side) -->
+        <!-- Control Panel -->
+        <a href="#" class="btn btn-light my-btn2" title="Control Panel">
+            <i class="fas fa-user-cog f-size2"></i>
+        </a>
+        <!-- Django Admin -->
+        <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-warning ms-1 my-btn2" title="Admin">
+            <i class="fas fa-cog f-size2"></i>
+        </a>
+        <!-- Filter -->
+        <span class="text-light">&nbsp;|&nbsp;</span>
+        <button class="btn my-btn2" style="background-color: #a8b8d0;" title="Filter">
+            <i class="fas fa-filter"></i>
+        </button>
+        <!-- Search -->
+        <button class="btn my-btn2 ms-1" style="background-color: #d3d3d3;" title="Search">
+            <i class="fas fa-search"></i>
+        </button>
+        <!-- Refresh -->
+        <a href="{% url 'backend' %}" class="btn btn-secondary ms-1" title="Refresh">
+            <i class="fas fa-sync-alt"></i>
+        </a>
+        <span class="text-light">&nbsp;|&nbsp;</span>
+        <!-- Logout -->
+        <a href="{% url 'logout' %}" class="btn btn-danger my-btn2" title="Logout">
+            <i class="fas fa-power-off f-size2"></i>
+        </a>
+        </li>
+        <!-- </ul> -->
         <hr class="text-light">
         <!-- Global search navbar (method not required) -->
-        <form action="" class="d-flex">
+        <!-- <form action="" class="d-flex">
             <input class="form-control me-1" name="q" type="search" placeholder="Global Search" value="{{ request.GET.q }}">
             <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
                 <i class="fas fa-search"></i>
@@ -32,7 +51,7 @@
             <a href="{% url 'backend' %}" class="btn btn-secondary ms-1" title="Refresh">
                 <i class="fas fa-sync-alt"></i>
             </a>
-        </form>
+        </form> -->
         <hr class="text-light">
     </div>
 {% endblock nav-content %}
