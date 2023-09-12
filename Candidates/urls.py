@@ -36,4 +36,5 @@ urlpatterns = [
     path("<int:id>/", views.candidate, name="candidate"),
     # Export to PDF
     path("<int:id>/index/", views.index, name="index"),
+    path("pdf/<int:id>/", views.pdf, name="pdf"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

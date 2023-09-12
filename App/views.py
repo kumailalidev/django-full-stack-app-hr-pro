@@ -138,7 +138,6 @@ def candidate(request, id):
 
 
 # EXPORT TO PDF
-# Method 1 (Simple)
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index(request, id):
@@ -155,12 +154,34 @@ def index(request, id):
     }
     path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+
+    # Method 1 (Simple, but exports the all the content) Generated via URL
+    # pdf = pdfkit.from_url(
+    #     "http://localhost:8000/" + str(c.id),
+    #     False,
+    #     options=options,
+    #     configuration=config,
+    # )
+    # response = HttpResponse(pdf, content_type="application/pdf")
+    # response["Content-disposition"] = "attachment; filename=candidate.pdf"
+    # return response
+
+    # Method 2 (Customized, but requires an external file)
+    pdf_name = c.firstname + "_" + c.lastname + ".pdf"
     pdf = pdfkit.from_url(
-        "http://localhost:8000/" + str(c.id),
+        "http://localhost:8000/pdf/" + str(c.id),
         False,
         options=options,
         configuration=config,
     )
     response = HttpResponse(pdf, content_type="application/pdf")
-    response["Content-disposition"] = "attachment; filename=candidate.pdf"
+    response["Content-disposition"] = f"attachment; filename={pdf_name}"
     return response
+
+
+# Template PDF
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def pdf(request, id):
+    candidate = Candidate.objects.get(id=id)
+    return render(request, "pdf.html", {"candidate": candidate})
