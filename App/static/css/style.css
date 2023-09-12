@@ -49,6 +49,11 @@ a {
   transform: translateX(-50%);
   position: relative;
 }
+.btn-side {
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+}
 
 /* Pagination (Grey) */
 .page-item.active .page-link {

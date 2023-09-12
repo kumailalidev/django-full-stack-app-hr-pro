@@ -118,7 +118,11 @@
             </tr>
         </thead>
         <tbody style="font-size: 14px;">
+            <!-- Get data from backend -->
             {% for data in candidates %}
+
+            <!-- Include (to get PK) -->
+            {% include "modals/note.html" %}
             <tr>
                 <td id="top-border" label="Name">{{ data.firstname }} {{ data.lastname }}</td>
                 <td id="sm-border" label="Email">{{ data.email }}</td>
@@ -150,10 +154,20 @@
                     <td>No</td>
                 {% endif %}
                 -->
-                <td>
-                    <a href="{% url 'candidate' data.id %}" class="btn btn-secondary mt-btn2 btn-sm" title="View candidate">
+                <td class="btn-side">
+                    <a href="{% url 'candidate' data.id %}" class="btn btn-secondary my-btn2 btn-sm" title="View candidate">
                         <i class="fas fa-user-alt"></i>
                     </a>
+                    <!-- Statement: If exists company note = show button, Else = disable button -->
+                    {% if data.company_note == '' %}
+                    <button disabled class="btn btn-outline-warning text-dark btn-sm ms-1 my-btn2" title="Company Note" data-bs-toggle="modal">
+                        <i class="fas fa-question"></i>
+                    </button>
+                    {% else %}
+                    <button class="btn btn-warning text-dark btn-sm ms-1 my-btn2" title="Company Note" data-bs-toggle="modal" data-bs-target="#noteModal{{ data.pk }}">
+                        <i class="fas fa-question"></i>
+                    </button>
+                    {% endif %}
                 </td>
                 {% empty %}
                 <td colspan="8" class="text-danger"><strong>No records found</strong></td>
