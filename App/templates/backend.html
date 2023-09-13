@@ -24,6 +24,7 @@
             </li>
         </ul>
         <!-- Al buttons on navbar (Right side) -->
+        {% if request.user.is_super_user %}
         <!-- Control Panel -->
         <a href="#" class="btn btn-light my-btn2" title="Control Panel">
             <i class="fas fa-user-cog f-size2"></i>
@@ -32,8 +33,12 @@
         <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-warning ms-1 my-btn2" title="Admin">
             <i class="fas fa-cog f-size2"></i>
         </a>
-        <!-- Filter -->
         <span class="text-light">&nbsp;|&nbsp;</span>
+        {% else %}
+        <!-- Blank -->
+        {% endif %}
+
+        <!-- Filter -->
         <button class="btn my-btn2" style="background-color: #a8b8d0;" title="Filter" data-bs-toggle="modal" data-bs-target="#filterModal">
             <i class="fas fa-filter"></i>
         </button>
