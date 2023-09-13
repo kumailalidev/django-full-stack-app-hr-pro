@@ -142,6 +142,7 @@
             <!-- Include (to get PK) -->
             {% include "modals/note.html" %}
             {% include "modals/delete.html" %}
+            {% include "modals/email.html" %}
             <tr>
                 <td id="top-border" label="Name">{{ data.firstname }} {{ data.lastname }}</td>
                 <td id="sm-border" label="Email">{{ data.email }}</td>
@@ -187,9 +188,15 @@
                         <button disabled class="btn btn-outline-warning text-dark btn-sm ms-1 my-btn2" title="Company Note" data-bs-toggle="modal">
                             <i class="fas fa-question"></i>
                         </button>
+                        <button disabled class="btn btn-outline-primary text-dark ms-1">
+                            <i class="fas fa-envelope"></i>
+                        </button>
                         {% else %}
                         <button class="btn btn-warning text-dark btn-sm ms-1 my-btn2" title="Company Note" data-bs-toggle="modal" data-bs-target="#noteModal{{ data.pk }}">
                             <i class="fas fa-question"></i>
+                        </button>
+                        <button class="btn btn-primary ms-1" data-bs-toggle="modal" data-bs-target="#emailModal{{ data.pk }}">
+                            <i class="fas fa-envelope"></i>
                         </button>
                         {% endif %}
                     {% endif %}
