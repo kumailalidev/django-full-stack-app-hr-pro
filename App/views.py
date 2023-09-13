@@ -245,7 +245,7 @@ def email(request):
             mail = EmailMessage(subject, message, company, [email])
             mail.send()
 
-            message.success(request, "Email sent successfully !")
+            messages.success(request, "Email sent successfully !")
             return HttpResponseRedirect("/backend")
         else:
             form = EmailForm()
