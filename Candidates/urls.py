@@ -29,10 +29,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Frontend
     path("", views.home, name="home"),
-    path("register", views.register, name="register"),
+    path("register/", views.register, name="register"),
     path("login/", include("django.contrib.auth.urls")),
     # Backend
-    path("backend", views.backend, name="backend"),
+    path("backend/", views.backend, name="backend"),
     path("<int:id>/", views.candidate, name="candidate"),
     # Export to PDF
     path("<int:id>/index/", views.index, name="index"),
