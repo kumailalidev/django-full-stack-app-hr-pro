@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import CandidateForm
-from .models import Candidate
+from .forms import CandidateForm, EmailForm
+from .models import Candidate, Email
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,7 @@ from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator
 from django.db.models import Q
 import pdfkit
+from django.core.mail import EmailMessage
 
 # Concatenate (F-name and L-name)
 from django.db.models.functions import Concat  # Concatenate
@@ -217,3 +218,35 @@ def index(request, id):
 def pdf(request, id):
     candidate = Candidate.objects.get(id=id)
     return render(request, "pdf.html", {"candidate": candidate})
+
+
+# SEND EMAIL
+def email(request):
+    if request.method == "POST":
+        # Save the message in DB (No ModelForm)
+        to_db = Email(
+            status=request.POST.get("status"),
+            name=request.POST.get("name"),
+            email=request.POST.get("email"),
+            subject=request.POST.get("subject"),
+            message=request.POST.get("message"),
+        )
+        to_db.save()
+
+        form = EmailForm(request.POST)
+        # Company subject
+        company = "Django Mastery"
+        # Send email via forms.py
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
+
+            mail = EmailMessage(subject, message, company, [email])
+            mail.send()
+
+            message.success(request, "Email sent successfully !")
+            return HttpResponseRedirect("/backend")
+        else:
+            form = EmailForm()
+            return render(request, {"form": form})
