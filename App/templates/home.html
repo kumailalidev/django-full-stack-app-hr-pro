@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container card p-3 border-dark text-center mt-5" style="width: 35%;">
         <!-- Message from backend (success - views.py) -->
-        <div class="text-center">
+        <!-- <div class="text-center">
             {% for message in messages %}
                 {% if message.tags == 'success' %}
                     <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -13,7 +13,10 @@
                     </div>
                 {% endif %}
             {% endfor %}
-        </div>
+        </div> -->
+
+        <!-- Success Message -->
+        {% include 'partials/successMsg.html' %}
         <h1>Job vacancy register</h1>
         <h5 class="mt-5">
             Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15

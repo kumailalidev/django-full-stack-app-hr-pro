@@ -159,6 +159,16 @@ def candidate(request, id):
     return render(request, "candidate.html", {"candidate": candidate})
 
 
+# Delete
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def delete(request, id):
+    candidate = Candidate.objects.get(id=id)
+    candidate.delete()
+    messages.success(request, "Candidate deleted successfully")
+    return HttpResponseRedirect("/backend")
+
+
 # EXPORT TO PDF
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
