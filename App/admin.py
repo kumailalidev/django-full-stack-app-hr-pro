@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Candidate
+from .models import Candidate, Email
 from .forms import CandidateForm
 from django.utils.html import format_html
 
@@ -166,3 +166,14 @@ class CandidateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Candidate, CandidateAdmin)
+
+
+class EmailAdmin(admin.ModelAdmin):
+    readonly_fields = ("status", "name", "email", "subject", "message")
+    list_display = ["name", "email", "subject", "status"]
+    search_fields = ["name", "email", "subject"]
+    list_filter = ["status"]
+    list_per_page = 10
+
+
+admin.site.register(Email, EmailAdmin)
