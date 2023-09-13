@@ -136,7 +136,12 @@
     {% endif %}
     <hr>
     {% block btn-bottom %}
-    <a href="{% url 'backend' %}" class="btn btn-secondary mt-3 mb-3">All Candidates</a>
+    <a href="{% url 'backend' %}" class="btn btn-secondary mt-3 mb-3">Back</a>
+    {% if request.user.is_superuser %}
+    <a href="{% url 'admin:App_candidate_change' candidate.id %}" target="_blank" class="btn btn-secondary mt-3 mb-3">Note</a>
+    {% else %}
+    <!-- Blank -->
+    {% endif %}
     <a href="{% url 'index' candidate.id %}" class="btn btn-warning mt-3 mb-3">Export to PDF</a>
     {% endblock btn-bottom %}
 </div>
