@@ -26,12 +26,12 @@
         <!-- Al buttons on navbar (Right side) -->
         {% if request.user.is_superuser %}
         <!-- Control Panel -->
-        <a href="#" class="btn btn-light my-btn2" title="Control Panel">
+        <a href="{% url 'admin:App_candidate_changelist' %}" target="_blank" class="btn btn-light my-btn2" title="Control Panel">
             <i class="fas fa-user-cog f-size2"></i>
         </a>
         <!-- Django Admin -->
-        <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-warning ms-1 my-btn2" title="Admin">
-            <i class="fas fa-cog f-size2"></i>
+        <a href="{% url 'admin:App_email_changelist' %}" target="_blank" class="btn btn-warning ms-1 my-btn2" title="Admin">
+            <i class="fas fa-envelope f-size2"></i>
         </a>
         <span class="text-light">&nbsp;|&nbsp;</span>
         {% else %}
