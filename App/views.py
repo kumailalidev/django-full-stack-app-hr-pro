@@ -77,8 +77,19 @@ def backend(request):
     paginator = Paginator(all_candidate_list, 10)
     page = request.GET.get("page")
     all_candidate = paginator.get_page(page)
+
+    # Counters
+    total = Candidate.objects.all().count()
+    frontend = Candidate.objects.filter(job="FR-22")
+    backend = Candidate.objects.filter(job="BA-10")
+    fullstack = Candidate.objects.filter(job="FU-15")
+
     context = {
         "candidates": all_candidate,
+        "total": total,
+        "frontend": frontend,
+        "backend": backend,
+        "fullstack": fullstack,
     }
 
     return render(request, "backend.html", context)
