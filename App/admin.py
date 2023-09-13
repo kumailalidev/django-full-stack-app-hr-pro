@@ -169,11 +169,34 @@ admin.site.register(Candidate, CandidateAdmin)
 
 
 class EmailAdmin(admin.ModelAdmin):
-    readonly_fields = ("status", "name", "email", "subject", "message")
-    list_display = ["name", "email", "subject", "status"]
+    readonly_fields = (
+        "status",
+        "name",
+        "email",
+        "subject",
+        "message",
+        "employee",
+        "sent_on",
+    )
+    list_display = ["name", "email", "subject", "status", "sent_on"]
     search_fields = ["name", "email", "subject"]
     list_filter = ["status"]
     list_per_page = 10
+
+    fieldsets = [
+        (
+            "INFORMATIVE DATA",
+            {"fields": ["email", "status"]},
+        ),
+        (
+            "EMAIL CONTENT",
+            {"fields": ["subject", "message"]},
+        ),
+        (
+            "REGISTRATION",
+            {"fields": ["employee", "sent_on"]},
+        ),
+    ]
 
 
 admin.site.register(Email, EmailAdmin)

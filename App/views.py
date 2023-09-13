@@ -225,6 +225,7 @@ def email(request):
     if request.method == "POST":
         # Save the message in DB (No ModelForm)
         to_db = Email(
+            employee=request.POST.get("employee"),
             status=request.POST.get("status"),
             name=request.POST.get("name"),
             email=request.POST.get("email"),
