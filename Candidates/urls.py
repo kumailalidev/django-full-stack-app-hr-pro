@@ -38,4 +38,6 @@ urlpatterns = [
     # Export to PDF
     path("<int:id>/index/", views.index, name="index"),
     path("pdf/<int:id>/", views.pdf, name="pdf"),
+    # Email
+    path("email", views.email, name="email"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
