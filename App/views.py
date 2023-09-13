@@ -53,7 +53,18 @@ def backend(request):
         job = request.POST.get("job")
         gender = request.POST.get("gender")
         filter = Candidate.objects.filter(Q(job=job) | Q(gender=gender))
-        context = {"candidates": filter}
+        # Counters
+        total = Candidate.objects.all().count()
+        frontend = Candidate.objects.filter(job="FR-22")
+        backend = Candidate.objects.filter(job="BA-10")
+        fullstack = Candidate.objects.filter(job="FU-15")
+        context = {
+            "candidates": filter,
+            "total": total,
+            "frontend": frontend,
+            "backend": backend,
+            "fullstack": fullstack,
+        }
         return render(request, "backend.html", context)  # NOTE: Breaks pagination
 
     # Global search
