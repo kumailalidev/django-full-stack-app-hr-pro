@@ -213,20 +213,36 @@
         {% if candidates.has_other_pages %}
         <ul class="pagination">
             {% if candidates.has_previous %}
-            <a href="?page=1" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3;">First</a>
-            <li class="page-item"><a href="?page?={{ candidates.previous_page_number }}" class="page-link"><i class="fas fa-angle-double-left"></i></a></li>
+                <a href="?page=1" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3;">First</a>
+                <li class="page-item">
+                    <a href="?page={{ candidates.previous_page_number }}" class="page-link">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
             {% else %}
-            <li class="page-item disabled"></li>
+                <li class="page-item disabled"></li>
             {% endif %}
+            
             {% for i in candidates.paginator.page_range %}
-            {% if candidates.number == i %}
-            <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only"></span></span></li>
-            {% else %}
-            <li class="page-item"><a href="?page{{ i }}">{{ i }}</a></li>
-            {% endif %}
+                {% if candidates.number == i %}
+                <li class="page-item active">
+                    <span class="page-link">{{ i }}
+                        <span class="sr-only"></span>
+                    </span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+                {% endif %}
             {% endfor %}
-            {% if candidates.has_previous %}
-            <li class="page-item"><a href="?page?={{ candidates.next_page_number }}" class="page-link"><i class="fas fa-angle-double-right"></i></a></li>
+
+            {% if candidates.has_next %}
+            <li class="page-item">
+                <a href="?page={{ candidates.next_page_number }}" class="page-link">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
+            </li>
             <a href="?page={{ candidates.paginator.num_pages }}" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3; border-left: none;">Last</a>
             {% else %}
             <li class="page-item disabled"></li>

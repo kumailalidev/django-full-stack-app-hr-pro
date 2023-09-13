@@ -86,7 +86,7 @@ def backend(request):
         all_candidate_list = Candidate.objects.all().order_by("-created_at")
 
     # Pagination
-    paginator = Paginator(all_candidate_list, 10)
+    paginator = Paginator(all_candidate_list, 5)
     page = request.GET.get("page")
     all_candidate = paginator.get_page(page)
 

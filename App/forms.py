@@ -250,7 +250,7 @@ class CandidateForm(forms.ModelForm):
 
     # Position
     position = forms.CharField(
-        label="Last Company",
+        label="Position",
         min_length=3,
         max_length=50,
         widget=forms.TextInput(
@@ -310,7 +310,7 @@ class CandidateForm(forms.ModelForm):
                     "style": "font-size: 13px; cursor: pointer;",
                     "type": "date",
                     # Block typing inside the input
-                    "onkeydown": "return false",
+                    # "onkeydown": "return false",
                     "min": "1950-01-01",
                     "max": "2030-01-01",
                 }
@@ -321,7 +321,7 @@ class CandidateForm(forms.ModelForm):
                     "style": "font-size: 13px; cursor: pointer;",
                     "type": "date",
                     # Block typing inside the input
-                    "onkeydown": "return false",
+                    # "onkeydown": "return false",
                     "min": "1950-01-01",
                     "max": "2030-01-01",
                 }
@@ -332,7 +332,7 @@ class CandidateForm(forms.ModelForm):
                     "style": "font-size: 13px; cursor: pointer;",
                     "type": "date",
                     # Block typing inside the input
-                    "onkeydown": "return false",
+                    # "onkeydown": "return false",
                     "min": "1950-01-01",
                     "max": "2030-01-01",
                 }
@@ -343,7 +343,7 @@ class CandidateForm(forms.ModelForm):
                     "style": "font-size: 13px; cursor: pointer;",
                     "type": "date",
                     # Block typing inside the input
-                    "onkeydown": "return false",
+                    # "onkeydown": "return false",
                     "min": "1950-01-01",
                     "max": "2030-01-01",
                 }
@@ -354,7 +354,7 @@ class CandidateForm(forms.ModelForm):
                     "style": "font-size: 13px; cursor: pointer;",
                     "type": "date",
                     # Block typing inside the input
-                    "onkeydown": "return false",
+                    # "onkeydown": "return false",
                     "min": "1950-01-01",
                     "max": "2030-01-01",
                 }
@@ -703,6 +703,7 @@ class CandidateForm(forms.ModelForm):
         if finished_job > datetime.date.today():
             raise forms.ValidationError("Future dates is invalid")
         return finished_job
+
 
 # Send Email to Candidates
 class EmailForm(forms.Form):
