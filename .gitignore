@@ -1,5 +1,6 @@
 # Folders
 .venv/
+.vscode
 media/
 
 # Files
