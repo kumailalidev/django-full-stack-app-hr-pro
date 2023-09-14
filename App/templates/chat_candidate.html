@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 
+<!-- Block title -->
+    {% block title %} Candidate chat group {% endblock title %}
+
+<!-- Block navbar -->
+    {% block nav-fixed %} fixed-top {% endblock nav-fixed %}
+    {% block nav-content %}
+    <a href="" class="navbar-brand flex-grow-1 text-center text-light to_center">
+        <i class="fas fa-comment-alt"></i>&nbsp;&nbsp; ABOUT CANDIDATE
+    </a>
+    {% include 'partials/back.html' %}
+    {% endblock nav-content %}
+<!-- Block footer -->
+    {% block footer %} style="color: #d3d3d3" {% endblock footer %}
+
 <!-- Page content -->
-{% block content %}
-<h1 class="text-center mt-5">Chat group</h1>
-{% endblock content %}
+    {% block content %}
+    <h1 class="text-center mt-5">Chat group</h1>
+    {% endblock content %}
