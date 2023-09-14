@@ -12,3 +12,18 @@ $(document).ready(function () {
     changeYear: true,
   });
 });
+
+// 2) Enable/Disable 'PROFESSIONAL CARD . [x] I have experience
+$(document).ready(function () {
+  $(function () {
+    Emp();
+    $("#emp").click(Emp);
+  });
+  function Emp() {
+    if (this.checked) {
+      $("input.emp, textarea.emp").removeAttr("disabled");
+    } else {
+      $("input.emp, textarea.emp").attr("disabled", true);
+    }
+  }
+});

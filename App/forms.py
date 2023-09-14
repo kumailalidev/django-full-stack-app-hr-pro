@@ -143,6 +143,11 @@ class CandidateForm(forms.ModelForm):
     experience = forms.BooleanField(
         label="I have experience",
         required=False,
+        widget=forms.CheckboxInput(
+            attrs={
+                "id": "emp",
+            }
+        ),
     )
 
     # Message
@@ -236,12 +241,14 @@ class CandidateForm(forms.ModelForm):
                 "placeholder": "Tell us a little about what you did at the company...",
                 "style": "font-size: 13px;",
                 "rows": 7,
+                "class": "emp",
             }
         ),
     )
 
     # Company
     company = forms.CharField(
+        required=False,
         label="Last Company",
         min_length=3,
         max_length=50,
@@ -249,12 +256,14 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 "placeholder": "Company name",
                 "style": "font-size: 13px;",
+                "class": "emp",
             }
         ),
     )
 
     # Position
     position = forms.CharField(
+        required=False,
         label="Position",
         min_length=3,
         max_length=50,
@@ -262,6 +271,39 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 "placeholder": "Your occupation",
                 "style": "font-size: 13px;",
+                "class": "emp",
+            }
+        ),
+    )
+
+    # Started Job
+    started_job = forms.DateTimeField(
+        required=False,
+        widget=forms.DateTimeInput(
+            attrs={
+                "style": "font-size: 13px; cursor: pointer;",
+                "type": "date",
+                # Block typing inside the input
+                # "onkeydown": "return false",
+                "min": "1950-01-01",
+                "max": "2030-01-01",
+                "class": "emp",
+            }
+        ),
+    )
+
+    # Finished Job
+    finished_job = forms.DateTimeField(
+        required=False,
+        widget=forms.DateTimeInput(
+            attrs={
+                "style": "font-size: 13px; cursor: pointer;",
+                "type": "date",
+                # Block typing inside the input
+                # "onkeydown": "return false",
+                "min": "1950-01-01",
+                "max": "2030-01-01",
+                "class": "emp",
             }
         ),
     )
@@ -344,28 +386,30 @@ class CandidateForm(forms.ModelForm):
                     "max": "2030-01-01",
                 }
             ),
-            # Started Job
-            "started_job": forms.DateInput(
-                attrs={
-                    "style": "font-size: 13px; cursor: pointer;",
-                    "type": "date",
-                    # Block typing inside the input
-                    # "onkeydown": "return false",
-                    "min": "1950-01-01",
-                    "max": "2030-01-01",
-                }
-            ),
-            # Finished Job
-            "finished_job": forms.DateInput(
-                attrs={
-                    "style": "font-size: 13px; cursor: pointer;",
-                    "type": "date",
-                    # Block typing inside the input
-                    # "onkeydown": "return false",
-                    "min": "1950-01-01",
-                    "max": "2030-01-01",
-                }
-            ),
+            # # Started Job
+            # "started_job": forms.DateInput(
+            #     attrs={
+            #         "style": "font-size: 13px; cursor: pointer;",
+            #         "type": "date",
+            #         # Block typing inside the input
+            #         # "onkeydown": "return false",
+            #         "min": "1950-01-01",
+            #         "max": "2030-01-01",
+            #         "class": "emp",
+            #     }
+            # ),
+            # # Finished Job
+            # "finished_job": forms.DateInput(
+            #     attrs={
+            #         "style": "font-size: 13px; cursor: pointer;",
+            #         "type": "date",
+            #         # Block typing inside the input
+            #         # "onkeydown": "return false",
+            #         "min": "1950-01-01",
+            #         "max": "2030-01-01",
+            #         "class": "emp",
+            #     }
+            # ),
             # Phone field
             "phone": forms.TextInput(
                 attrs={
@@ -417,6 +461,10 @@ class CandidateForm(forms.ModelForm):
     #     - Super function controls all the inputs inside frontend, backend and admin
     def __init__(self, *args, **kwargs):
         super(CandidateForm, self).__init__(*args, **kwargs)
+
+        # NOTE: This will breaks admin
+        # self.fields["started_job"].required = False
+        # self.fields["finished_job"].required = False
 
         # Disable inputs (By ID/PK)
         # instance = getattr(self, "instance", None)
@@ -701,15 +749,25 @@ class CandidateForm(forms.ModelForm):
 
     # B) JOB
     def clean_started_job(self):
+        # started_job = self.cleaned_data["started_job"]
+        # if started_job > datetime.date.today():
+        #     raise forms.ValidationError("Future dates is invalid")
+        # return started_job
         started_job = self.cleaned_data["started_job"]
-        if started_job > datetime.date.today():
-            raise forms.ValidationError("Future dates is invalid")
+        if started_job is not None:
+            if started_job > datetime.date.today():
+                raise forms.ValidationError("Future dates is invalid")
         return started_job
 
     def clean_finished_job(self):
+        # finished_job = self.cleaned_data["finished_job"]
+        # if finished_job > datetime.date.today():
+        #     raise forms.ValidationError("Future dates is invalid")
+        # return finished_job
         finished_job = self.cleaned_data["finished_job"]
-        if finished_job > datetime.date.today():
-            raise forms.ValidationError("Future dates is invalid")
+        if finished_job is not None:
+            if finished_job > datetime.date.today():
+                raise forms.ValidationError("Future dates is invalid")
         return finished_job
 
 
