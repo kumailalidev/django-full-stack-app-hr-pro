@@ -27,3 +27,18 @@ $(document).ready(function () {
     }
   }
 });
+
+// 2) Enable/Disable 'FINISHED DATE (Card professional)'.
+// [x] I am employed = Disabled
+$(function () {
+  Exp();
+  $("#exp").click(Exp);
+});
+function Exp() {
+  if (this.checked) {
+    $("input#go").attr("disabled", true);
+    $("#go").val(""); // clear to prevent sending data.
+  } else {
+    $("input#go").removeAttr("disabled");
+  }
+}

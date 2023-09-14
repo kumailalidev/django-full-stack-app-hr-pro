@@ -249,7 +249,7 @@ class CandidateForm(forms.ModelForm):
     # Company
     company = forms.CharField(
         required=False,
-        label="Last Company",
+        label="Company",
         min_length=3,
         max_length=50,
         widget=forms.TextInput(
@@ -304,11 +304,21 @@ class CandidateForm(forms.ModelForm):
                 "min": "1950-01-01",
                 "max": "2030-01-01",
                 "class": "emp",
+                "id": "go",
             }
         ),
     )
 
-    employed = forms.BooleanField(label="I am employed", required=False)
+    employed = forms.BooleanField(
+        label="I am employed",
+        required=False,
+        widget=forms.CheckboxInput(
+            attrs={
+                "id": "exp",
+                "class": "emp",
+            }
+        ),
+    )
     remote = forms.BooleanField(label="I agree to work remotely", required=False)
     travel = forms.BooleanField(label="I'm available for travel", required=False)
 
