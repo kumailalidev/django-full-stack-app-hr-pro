@@ -52,14 +52,14 @@ def backend(request):
     # Global Filter
     if "f" in request.GET:
         f = request.GET["f"]
-        all_candidate_list = Candidate.objects.filter(
-            Q(job__iexact=f) | Q(gender__iexact=f)
-        ).order_by("-created_at")
+        all = Candidate.objects.filter(Q(job__iexact=f) | Q(gender__iexact=f)).order_by(
+            "-created_at"
+        )
 
     # Global search
     elif "q" in request.GET:
         q = request.GET["q"]
-        all_candidate_list = (
+        all = (
             Candidate.objects.annotate(name=Concat("firstname", P(" "), "lastname"))
             .filter(
                 Q(name__icontains=q)
@@ -71,18 +71,18 @@ def backend(request):
             .order_by("-created_at")
         )
     else:
-        all_candidate_list = Candidate.objects.all().order_by("-created_at")
+        all = Candidate.objects.all().order_by("-created_at")
 
     # Pagination
-    paginator = Paginator(all_candidate_list, 3)
+    paginator = Paginator(all, 3)
     page = request.GET.get("page")
     all_candidate = paginator.get_page(page)
 
     # Counters
-    total = Candidate.objects.all().count()
-    frontend = Candidate.objects.filter(job="FR-22")
-    backend = Candidate.objects.filter(job="BA-10")
-    fullstack = Candidate.objects.filter(job="FU-15")
+    total = all.count()
+    frontend = all.filter(job="FR-22")
+    backend = all.filter(job="BA-10")
+    fullstack = all.filter(job="FU-15")
 
     context = {
         "candidates": all_candidate,
