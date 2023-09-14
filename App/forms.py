@@ -73,7 +73,8 @@ class CandidateForm(forms.ModelForm):
             attrs={
                 "placeholder": "Example: FR-22",
                 "style": "font-size: 13px; text-transform: uppercase;",
-                "data-mask": "AA-00",
+                # "data-mask": "AA-00", # JQuery mask
+                "x-data x-mask": "aa-99",  # Alpine.js mask
             }
         ),
     )
@@ -363,8 +364,9 @@ class CandidateForm(forms.ModelForm):
             "phone": forms.TextInput(
                 attrs={
                     "style": "font-size: 13px;",
-                    "placeholder": "Phone",
-                    "data-mask": "(00) 00000-0000",
+                    "placeholder": "(99) 99999-9999",
+                    # "data-mask": "(00) 00000-0000", # JQuery mask
+                    "x-data x-mask": "(99) 99999-9999",  # Alpine.js mask
                 }
             ),
             # Salary field
