@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from datetime import date  # Used in Birthdate
 import datetime  # Used to prevent future dates
+from django.utils import timezone
 
 
 # Every letters to lowercase
@@ -215,6 +216,23 @@ class CandidateForm(forms.ModelForm):
         ),
     )
 
+    # Finished Course
+    finished_course = forms.DateTimeField(
+        required=False,
+        disabled=True,
+        widget=forms.DateTimeInput(
+            attrs={
+                "style": "font-size: 13px; cursor: pointer;",
+                "type": "date",
+                # Block typing inside the input
+                # "onkeydown": "return false",
+                "min": "1950-01-01",
+                "max": "2030-01-01",
+                "disabled": "true",
+            }
+        ),
+    )
+
     # About college course
     about_course = forms.CharField(
         label="About your college course",
@@ -337,14 +355,14 @@ class CandidateForm(forms.ModelForm):
         exclude = ["created_at", "situation"]
         # fields = "__all__"
         # fields = ["firstname", "lastname", "email", "age", "message",]
-        # Labels Control
 
-        labels = {
-            "started_course": "Started",
-            "finished_course": "Finished",
-            "started_job": "Started",
-            "finished_job": "Finished",
-        }
+        # If you use in widget:
+        # labels = {
+        #     "started_course": "Started",
+        #     "finished_course": "Finished",
+        #     "started_job": "Started",
+        #     "finished_job": "Finished",
+        # }
 
         # Native choice field
         SALARY = (
@@ -386,16 +404,17 @@ class CandidateForm(forms.ModelForm):
                 }
             ),
             # Finished Course
-            "finished_course": forms.DateInput(
-                attrs={
-                    "style": "font-size: 13px; cursor: pointer;",
-                    "type": "date",
-                    # Block typing inside the input
-                    # "onkeydown": "return false",
-                    "min": "1950-01-01",
-                    "max": "2030-01-01",
-                }
-            ),
+            # "finished_course": forms.DateInput(
+            #     attrs={
+            #         "style": "font-size: 13px; cursor: pointer;",
+            #         "type": "date",
+            #         # Block typing inside the input
+            #         # "onkeydown": "return false",
+            #         "min": "1950-01-01",
+            #         "max": "2030-01-01",
+            #         "disabled": "true",
+            #     }
+            # ),
             # # Started Job
             # "started_job": forms.DateInput(
             #     attrs={
@@ -462,6 +481,7 @@ class CandidateForm(forms.ModelForm):
             "status_course": forms.Select(
                 attrs={
                     "style": "font-size: 13px;",
+                    "onChange": "statusCourse(this)",
                 }
             ),
         }
@@ -751,11 +771,11 @@ class CandidateForm(forms.ModelForm):
             raise forms.ValidationError("Future dates is invalid")
         return started_course
 
-    def clean_finished_course(self):
-        finished_course = self.cleaned_data["finished_course"]
-        if finished_course > datetime.date.today():
-            raise forms.ValidationError("Future dates is invalid")
-        return finished_course
+    # def clean_finished_course(self):
+    #     finished_course = self.cleaned_data["finished_course"]
+    #     if finished_course > datetime.date.today():
+    #         raise forms.ValidationError("Future dates is invalid")
+    #     return finished_course
 
     # B) JOB
     def clean_started_job(self):
@@ -763,22 +783,33 @@ class CandidateForm(forms.ModelForm):
         # if started_job > datetime.date.today():
         #     raise forms.ValidationError("Future dates is invalid")
         # return started_job
-        started_job = self.cleaned_data["started_job"]
-        if started_job is not None:
-            if started_job > datetime.date.today():
-                raise forms.ValidationError("Future dates is invalid")
-        return started_job
 
-    def clean_finished_job(self):
-        # finished_job = self.cleaned_data["finished_job"]
-        # if finished_job > datetime.date.today():
-        #     raise forms.ValidationError("Future dates is invalid")
-        # return finished_job
-        finished_job = self.cleaned_data["finished_job"]
-        if finished_job is not None:
-            if finished_job > datetime.date.today():
-                raise forms.ValidationError("Future dates is invalid")
-        return finished_job
+        # Modified to prevent errors
+        # started_job = self.cleaned_data["started_job"]
+        # if started_job is not None:
+        #     if started_job > datetime.date.today():
+        #         raise forms.ValidationError("Future dates is invalid")
+        # return started_job
+
+        started_job = self.cleaned_data["started_job"]
+        # if started_job != None and started_job > timezone.now():
+        if started_job != None and started_job.date() > timezone.now.date():
+            raise forms.ValidationError("Future dates is invalid")
+        else:
+            return started_job
+
+    # def clean_finished_job(self):
+    #     # finished_job = self.cleaned_data["finished_job"]
+    #     # if finished_job > datetime.date.today():
+    #     #     raise forms.ValidationError("Future dates is invalid")
+    #     # return finished_job
+
+    #     # Modified to prevent errors
+    #     finished_job = self.cleaned_data["finished_job"]
+    #     if finished_job is not None:
+    #         if finished_job > datetime.date.today():
+    #             raise forms.ValidationError("Future dates is invalid")
+    #     return finished_job
 
 
 # Send Email to Candidates

@@ -28,7 +28,7 @@ $(document).ready(function () {
   }
 });
 
-// 2) Enable/Disable 'FINISHED DATE (Card professional)'.
+// 3) Enable/Disable 'FINISHED DATE (Card professional)'.
 // [x] I am employed = Disabled
 $(function () {
   Exp();
@@ -40,5 +40,16 @@ function Exp() {
     $("#go").val(""); // clear to prevent sending data.
   } else {
     $("input#go").removeAttr("disabled");
+  }
+}
+
+// 4) Enable/Disable 'Finished date (Card Educational)'.
+// If status course is 'Completed', enable the finished input date
+// Pure JS
+function statusCourse(edu) {
+  var x = document.getElementsByName("finished_course");
+  for (var j = 0; j < x.length; j++) {
+    x[j].disabled = !(edu.value == "Completed");
+    x[j].value = "";
   }
 }
