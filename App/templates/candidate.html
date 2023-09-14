@@ -94,7 +94,11 @@
     <p><strong>Institution:</strong> {{candidate.institution}}</p>
     <p><strong>Course:</strong> {{candidate.course}}</p>
     <p><strong>Started:</strong> {{candidate.started_course}}</p>
-    <p><strong>Finished:</strong> {{candidate.finished_course}}</p>
+    {% if candidate.finished_course == None %}
+        <!-- Show nothing -->
+    {% else %}
+        <p><strong>Finished:</strong> {{candidate.finished_course}}</p>
+    {% endif %}
     <p>
         <strong>Status:</strong>
         {% if candidates.status == 'I took a break' %}
@@ -109,11 +113,15 @@
     <hr>
     <!-- EXPERIENCE -->
     <h6 class="text-primary mb-4 mt-4">EXPERIENCE</h6>
-    <p><strong>Company:</strong> {{candidate.Company}}</p>
-    <p><strong>Position:</strong> {{candidate.position}}</p>
-    <p><strong>Started:</strong> {{candidate.started_job}}</p>
-    <p><strong>Finished:</strong> {{candidate.finished_job}}</p>
-    <p><strong>About:</strong> {{candidate.about_job}}</p>
+    {% if candidate.company == '' %}
+        <p class="text-danger">This candidate has no experience</p>
+    {% else %}
+        <p><strong>Company:</strong> {{candidate.company}}</p>
+        <p><strong>Position:</strong> {{candidate.position}}</p>
+        <p><strong>Started:</strong> {{candidate.started_job}}</p>
+        <p><strong>Finished:</strong> {{candidate.finished_job}}</p>
+        <p><strong>About:</strong> {{candidate.about_job}}</p>
+    {% endif %}
     <!-- NOTE -->
     <h6 class="text-primary mb-4 mt-4">NOTE</h6>
     <!-- Employed -->
