@@ -65,10 +65,24 @@
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
     <!-- Alpine Core -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- DatePicker JS -->
+    <!-- Jquery UI (datepicker) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Static JS -->
     <script src="{% static 'js/script.js' %}"></script>
+
+    <!-- DatePicker set up - Method 1 (inline technique) -->
+    <!-- <script>
+      $(document).ready(function () {
+        $(".datepicker").datepicker({
+          yearRange: "-65:-18", // BIRTHDAY (Range: 18 and 65)
+          maxDate: "-18Y",
+          minDate: "-65Y",
+          changeMonth: true,
+          changeYear: true,
+
+        });
+      });
+    </script> -->
 
 </body>
 </html>

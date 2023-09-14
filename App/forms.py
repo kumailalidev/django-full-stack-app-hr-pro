@@ -19,6 +19,10 @@ class Uppercase(forms.CharField):
 
 
 class CandidateForm(forms.ModelForm):
+    # Static files
+    class Media:
+        js = ("js/script.js",)
+
     # Validations
 
     # First name
@@ -308,12 +312,14 @@ class CandidateForm(forms.ModelForm):
             # Birthday
             "birth": forms.DateInput(
                 attrs={
-                    "style": "font-size: 13px; cursor: pointer;",
-                    "type": "date",
+                    # "type": "date",
                     # Block typing inside the input
                     # "onkeydown": "return false",
+                    "style": "font-size: 13px; cursor: pointer;",
                     "min": "1950-01-01",
                     "max": "2030-01-01",
+                    "class": "datepicker",
+                    "placeholder": "Birth date",
                 }
             ),
             # Started course
@@ -666,18 +672,18 @@ class CandidateForm(forms.ModelForm):
             raise forms.ValidationError("Denied: Maximum allowed is 2mb")
         return image
 
-    # 7) BIRTHDAY (Rage: 18 and 65)
-    def clean_birth(self):
-        birth = self.cleaned_data.get("birth")
-        # Variables
-        b = birth
-        now = date.today()
-        age = (now.year - b.year) - ((now.month, now.day) < (b.month, b.day))
-        print(age)
-        # Statement
-        if age < 18 or age > 65:
-            raise forms.ValidationError("Denied: Age must be between 18 and 65")
-        return birth
+    # 7) BIRTHDAY (Rage: 18 and 65) (Jquery datepicker provides validation)
+    # def clean_birth(self):
+    #     birth = self.cleaned_data.get("birth")
+    #     # Variables
+    #     b = birth
+    #     now = date.today()
+    #     age = (now.year - b.year) - ((now.month, now.day) < (b.month, b.day))
+    #     print(age)
+    #     # Statement
+    #     if age < 18 or age > 65:
+    #         raise forms.ValidationError("Denied: Age must be between 18 and 65")
+    #     return birth
 
     # 8) Prevent FUTURES dates (card 3 and card 4)
     # A) College
