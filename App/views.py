@@ -239,3 +239,12 @@ def email(request):
         else:
             form = EmailForm()
             return render(request, {"form": form})
+
+
+# CHATBOX
+
+
+@login_required(login_url="login")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def chat_candidate(request):
+    return render(request, "chat_candidate.html")

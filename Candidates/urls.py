@@ -40,4 +40,6 @@ urlpatterns = [
     path("pdf/<int:id>/", views.pdf, name="pdf"),
     # Email
     path("email", views.email, name="email"),
+    # Candidate chat group
+    path("chat_candidate/", views.chat_candidate, name="chat_candidate"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
