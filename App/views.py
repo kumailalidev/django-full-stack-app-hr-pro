@@ -50,23 +50,11 @@ def backend(request):
     #     return render(request, "backend.html", context)  # NOTE: Breaks pagination
 
     # Global Filter
-    if request.method == "POST":
-        job = request.POST.get("job")
-        gender = request.POST.get("gender")
-        filter = Candidate.objects.filter(Q(job=job) | Q(gender=gender))
-        # Counters
-        total = Candidate.objects.all().count()
-        frontend = Candidate.objects.filter(job="FR-22")
-        backend = Candidate.objects.filter(job="BA-10")
-        fullstack = Candidate.objects.filter(job="FU-15")
-        context = {
-            "candidates": filter,
-            "total": total,
-            "frontend": frontend,
-            "backend": backend,
-            "fullstack": fullstack,
-        }
-        return render(request, "backend.html", context)  # NOTE: Breaks pagination
+    if "f" in request.GET:
+        f = request.GET["f"]
+        all_candidate_list = Candidate.objects.filter(
+            Q(job__iexact=f) | Q(gender__iexact=f)
+        ).order_by("-created_at")
 
     # Global search
     elif "q" in request.GET:
@@ -86,7 +74,7 @@ def backend(request):
         all_candidate_list = Candidate.objects.all().order_by("-created_at")
 
     # Pagination
-    paginator = Paginator(all_candidate_list, 5)
+    paginator = Paginator(all_candidate_list, 3)
     page = request.GET.get("page")
     all_candidate = paginator.get_page(page)
 
