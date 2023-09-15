@@ -155,10 +155,19 @@ def candidate(request, id):
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def delete(request, id):
+    x = Candidate.objects.values_list("email", flat=True)
+    y = Chat_candidate.objects.filter(candidate_email__in=x)
     candidate = Candidate.objects.get(id=id)
-    candidate.delete()
-    messages.success(request, "Candidate deleted successfully")
-    return HttpResponseRedirect("/backend")
+    for data in y:
+        if data.candidate_email in candidate.email:
+            candidate.delete()
+            Chat_candidate.objects.exclude(candidate_email__in=x).delete()
+            messages.success(request, "Candidate deleted successfully")
+            return HttpResponseRedirect("/backend")
+        else:
+            candidate.delete()
+            messages.success(request, "Candidate deleted successfully")
+            return HttpResponseRedirect("/backend")
 
 
 # EXPORT TO PDF

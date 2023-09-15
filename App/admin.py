@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Candidate, Email
+from .models import Candidate, Email, Chat_candidate
 from .forms import CandidateForm
 from django.utils.html import format_html
 
@@ -200,3 +200,13 @@ class EmailAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Email, EmailAdmin)
+
+# CHATBOX
+# About candidate
+
+
+class Chat_candidateAdmin(admin.ModelAdmin):
+    list_display = ["candidate_email", "user", "dt"]
+
+
+admin.site.register(Chat_candidate, Chat_candidateAdmin)
