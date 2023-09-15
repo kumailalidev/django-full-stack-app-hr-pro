@@ -1,4 +1,4 @@
 {
-  "ignore": "H021",
+  "ignore": "H021,H023,H030,H031",
   "indent": "2"
 }
