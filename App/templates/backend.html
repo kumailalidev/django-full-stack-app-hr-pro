@@ -1,18 +1,25 @@
 {% extends "base.html" %}
-
 <!-- Block title -->
-{% block title %}All Candidates{% endblock title %}
-
+{% block title %}
+    All Candidates
+{% endblock title %}
 <!-- Block filter -->
-{% block footer %} class="text-warning" {% endblock footer %}
-
+{% block footer %}
+    class="text-warning"
+{% endblock footer %}
 <!-- Block navbar -->
 {% block nav-content %}
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse mt-3 mt-md-3 mt-lg-0" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse mt-3 mt-md-3 mt-lg-0"
+         id="navbarSupportedContent">
         <!-- Left side navbar (Get users) -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-middle">
             <li class="nav-item text-light">
@@ -24,238 +31,280 @@
             </li>
         </ul>
         <!-- Al buttons on navbar (Right side) -->
-        {% if request.user.is_superuser %}
-        <!-- Control Panel -->
-        <a href="{% url 'admin:App_candidate_changelist' %}" target="_blank" class="btn btn-light my-btn2" title="Control Panel">
-            <i class="fas fa-user-cog f-size2"></i>
-        </a>
-        <!-- Django Admin -->
-        <a href="{% url 'admin:App_email_changelist' %}" target="_blank" class="btn btn-warning ms-1 my-btn2" title="Admin">
-            <i class="fas fa-envelope f-size2"></i>
-        </a>
-        <span class="text-light">&nbsp;|&nbsp;</span>
-        {% else %}
-        <!-- Blank -->
-        {% endif %}
-
-        <!-- Filter -->
-        <button class="btn my-btn2" style="background-color: #a8b8d0;" title="Filter" data-bs-toggle="modal" data-bs-target="#filterModal">
-            <i class="fas fa-filter"></i>
-        </button>
-        <!-- Search -->
-        <button class="btn my-btn2 ms-1" style="background-color: #d3d3d3;" title="Search" data-bs-toggle="modal" data-bs-target="#searchModal">
-            <i class="fas fa-search"></i>
-        </button>
-        <!-- Refresh -->
-        <a href="{% url 'backend' %}" class="btn btn-secondary ms-1" title="Refresh">
-            <i class="fas fa-sync-alt"></i>
-        </a>
-        <span class="text-light">&nbsp;|&nbsp;</span>
-        <!-- Logout -->
-        <a href="{% url 'logout' %}" class="btn btn-danger my-btn2" title="Logout" data-bs-toggle="modal" data-bs-target="#logoutModal">
-            <i class="fas fa-power-off f-size2"></i>
-        </a>
-        </li>
-        <!-- </ul> -->
+        <ul>
+            <li>
+                {% if request.user.is_superuser %}
+                    <!-- Control Panel -->
+                    <a href="{% url 'admin:App_candidate_changelist' %}"
+                       target="_blank"
+                       class="btn btn-light my-btn2"
+                       title="Control Panel">
+                        <i class="fas fa-user-cog f-size2"></i>
+                    </a>
+                    <!-- Django Admin -->
+                    <a href="{% url 'admin:App_email_changelist' %}"
+                       target="_blank"
+                       class="btn btn-warning ms-1 my-btn2"
+                       title="Admin">
+                        <i class="fas fa-envelope f-size2"></i>
+                    </a>
+                    <span class="text-light">&nbsp;|&nbsp;</span>
+                {% else %}
+                    <!-- Blank -->
+                {% endif %}
+                <!-- Filter -->
+                <button class="btn my-btn2"
+                        style="background-color: #a8b8d0"
+                        title="Filter"
+                        data-bs-toggle="modal"
+                        data-bs-target="#filterModal">
+                    <i class="fas fa-filter"></i>
+                </button>
+                <!-- Search -->
+                <button class="btn my-btn2 ms-1"
+                        style="background-color: #d3d3d3"
+                        title="Search"
+                        data-bs-toggle="modal"
+                        data-bs-target="#searchModal">
+                    <i class="fas fa-search"></i>
+                </button>
+                <!-- Refresh -->
+                <a href="{% url 'backend' %}"
+                   class="btn btn-secondary ms-1"
+                   title="Refresh">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+                <span class="text-light">&nbsp;|&nbsp;</span>
+                <!-- Logout -->
+                <a href="{% url 'logout' %}"
+                   class="btn btn-danger my-btn2"
+                   title="Logout"
+                   data-bs-toggle="modal"
+                   data-bs-target="#logoutModal">
+                    <i class="fas fa-power-off f-size2"></i>
+                </a>
+            </li>
+        </ul>
         <hr class="text-light">
-        <!-- Global search navbar (method not required) -->
-        <!-- <form action="" class="d-flex">
-            <input class="form-control me-1" name="q" type="search" placeholder="Global Search" value="{{ request.GET.q }}">
-            <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-            <a href="{% url 'backend' %}" class="btn btn-secondary ms-1" title="Refresh">
-                <i class="fas fa-sync-alt"></i>
-            </a>
-        </form> -->
         <hr class="text-light">
     </div>
 {% endblock nav-content %}
-
 <!-- Page content -->
 {% block content %}
-<div class="container" style="width: 90%;">
-    <!-- Button -->
-    <!-- <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-3 mb-3 my-btn">Log out</a> -->
-
-    <!-- Header -->
-    <!-- <h6 class="card p-2 bg-secondary text-light text-center mb-3">LIST OF CANDIDATES</h6> -->
-
-    <!-- Filter (Using native Django filters) -->
-    <!-- NOTE: Moved to filter.html -->
-    <!-- <form method="POST" class="mt-5 mb-2">
-        {% csrf_token %}
-        <div class="btn-group wd-100" role="group" aria-label="Basic radio toggle button group"> -->
-            <!-- Occupation -->
-            <!-- <input type="submit" class="btn-check" value="FR-22" name="job" id="btnradio1" autocomplete="off">
-            <label {% if request.POST.job == 'FR-22' %} class="btn btn-secondary" {% else %} class="btn btn-outline-secondary" {% endif %} for="btnradio1">FR-22</label>
-
-            <input type="submit" class="btn-check" value="BA-10" name="job" id="btnradio2" autocomplete="off">
-            <label {% if request.POST.job == 'BA-10' %} class="btn btn-secondary" {% else %} class="btn btn-outline-secondary" {% endif %} for="btnradio2">BA-10</label>
-
-            <input type="submit" class="btn-check" value="FU-15" name="job" id="btnradio3" autocomplete="off">
-            <label {% if request.POST.job == 'FU-15' %} class="btn btn-secondary" {% else %} class="btn btn-outline-secondary" {% endif %} for="btnradio3">FU-15</label>
-            &nbsp; &nbsp; -->
-
-            <!-- Gender -->
-            <!-- <input type="submit" class="btn-check" value="M" name="gender" id="btnradio4" autocomplete="off">
-            <label {% if request.POST.gender == 'M' %} class="btn btn-primary my-btn2" {% else %} class="btn btn-outline-primary my-btn2" {% endif %} for="btnradio4">M</label>
-
-            <input type="submit" class="btn-check" value="F" name="gender" id="btnradio5" autocomplete="off">
-            <label {% if request.POST.gender == 'F' %} class="btn btn-danger my-btn2" {% else %} class="btn btn-outline-danger my-btn2" {% endif %} for="btnradio5">F</label>
-            &nbsp; &nbsp;
-             -->
-            <!-- <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
-                <i class="fas fa-search"></i>
-            </button> -->
-        <!-- </div>
-    </form> -->
-
-    <!-- Success Message -->
-    <div class="mt-3">
-        {% include 'partials/successMsg.html' %}
-    </div>
-
-    <!-- Dashboard -->
-    <div class="mt-3 mb-2">
-        {% include "dashboard/dashboard.html" %}
-    </div>
-
-    <!-- Table -->
-    <table class="table table-bordered text-center">
-        <thead class="table-secondary">
-            <tr>
-                <th style="width: 19%;">Name</th>
-                <th style="width: 19%;">Email</th>
-                <th style="width: 14%;">Phone</th>
-                <th style="width: 8%;">Gender</th>
-                <th style="width: 10%;">Occupation</th>
-                <th style="width: 10%;">Experience</th>
-                <th style="width: 15%;">Received</th>
-                <th colspan="2" style="width: 5%;" class="bg-secondary text-light">
-                    <i class="fa fa-tools"></i>&nbsp;&nbsp;Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody style="font-size: 14px;">
-            <!-- Get data from backend -->
-            {% for data in candidates %}
-
-            <!-- Include (to get PK) -->
-            {% include "modals/note.html" %}
-            {% include "modals/delete.html" %}
-            {% include "modals/email.html" %}
-            <tr>
-                <td id="top-border" label="Name">{{ data.firstname }} {{ data.lastname }}</td>
-                <td id="sm-border" label="Email">{{ data.email }}</td>
-                <td id="sm-border" label="Phone">{{ data.phone }}</td>
-                <td id="sm-border" label="Gender">{{ data.gender }}</td>
-
-                <!-- Statement to Occupation -->
-                {% if data.job == "FR-22" %}
-                    <td id="sm-border" label="Occupation">Frontend</td>
-                {% elif data.job == "BA-10" %}
-                    <td id="sm-border" label="Occupation">Backend</td>
-                {% else %}
-                    <td id="sm-border" label="Occupation">Fullstack</td>
-                {% endif %}
-
-                <!-- Statement to Experience -->
-                {% if data.experience == False %}
-                    <td id="sm-border" label="Experience"><span class="text-danger">No</span></td>    
-                {% else %}
-                    <td id="sm-border" label="Experience">Yes</td>
-                {% endif %}
-
-                <td id="sm-border" label="Received">{{ data.created_at|date:"m/d/Y (H:i)" }}</td>
-
-                <!--
-                {% if data.smoker == "1" %}
-                    <td>Yes</td>
-                {% else %}
-                    <td>No</td>
-                {% endif %}
-                -->
-                <td class="btn-side">
-                    <a href="{% url 'candidate' data.id %}" class="btn btn-secondary my-btn2 btn-sm" title="View candidate">
-                        <i class="fas fa-user-alt"></i>
-                    </a>
-                    <a href="{% url 'chat_candidate' data.id %}" class="btn my-btn2 btn-sm ms-1" title="About candidate" style="background-color: #e2e3e5;">
-                        <i class="fas fa-comment-alt"></i>
-                    </a>
-                    {% if request.user.is_superuser %}
-                    <a href="" class="btn btn-danger my-btn2 btn-sm ms-1" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal{{ data.pk }}">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                    {% else %}
-                        <!-- Statement: If exists company note = show button, Else = disable button -->
-                        {% if data.company_note == '' %}
-                        <button disabled class="btn btn-outline-warning text-dark btn-sm ms-1 my-btn2" title="Company Note" data-bs-toggle="modal">
-                            <i class="fas fa-question"></i>
-                        </button>
-                        <button disabled class="btn btn-outline-primary text-dark ms-1">
-                            <i class="fas fa-envelope"></i>
-                        </button>
+    <div class="container" style="width: 90%;">
+        <!-- Success Message -->
+        <div class="mt-3">{% include 'partials/successMsg.html' %}</div>
+        <!-- Dashboard -->
+        <div class="mt-3 mb-2">{% include "dashboard/dashboard.html" %}</div>
+        <!-- Table -->
+        <table class="table table-bordered text-center">
+            <thead class="table-secondary">
+                <tr>
+                    <th style="width: 19%;">Name</th>
+                    <th style="width: 19%;">Email</th>
+                    <th style="width: 14%;">Phone</th>
+                    <th style="width: 8%;">Gender</th>
+                    <th style="width: 10%;">Occupation</th>
+                    <th style="width: 10%;">Experience</th>
+                    <th style="width: 15%;">Received</th>
+                    <th colspan="2" style="width: 5%;" class="bg-secondary text-light">
+                        <i class="fa fa-tools"></i>&nbsp;&nbsp;Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 14px;">
+                <!-- Get data from backend -->
+                {% for data in candidates %}
+                    <!-- Include (to get PK) -->
+                    {% include "modals/note.html" %}
+                    {% include "modals/delete.html" %}
+                    {% include "modals/email.html" %}
+                    <tr>
+                        <td id="top-border" label="Name">{{ data.firstname }} {{ data.lastname }}</td>
+                        <td id="sm-border" label="Email">{{ data.email }}</td>
+                        <td id="sm-border" label="Phone">{{ data.phone }}</td>
+                        <td id="sm-border" label="Gender">{{ data.gender }}</td>
+                        <!-- Statement to Occupation -->
+                        {% if data.job == "FR-22" %}
+                            <td id="sm-border" label="Occupation">Frontend</td>
+                        {% elif data.job == "BA-10" %}
+                            <td id="sm-border" label="Occupation">Backend</td>
                         {% else %}
-                        <button class="btn btn-warning text-dark btn-sm ms-1 my-btn2" title="Company Note" data-bs-toggle="modal" data-bs-target="#noteModal{{ data.pk }}">
-                            <i class="fas fa-question"></i>
-                        </button>
-                        <button class="btn btn-primary ms-1" data-bs-toggle="modal" data-bs-target="#emailModal{{ data.pk }}">
-                            <i class="fas fa-envelope"></i>
-                        </button>
+                            <td id="sm-border" label="Occupation">Fullstack</td>
                         {% endif %}
+                        <!-- Statement to Experience -->
+                        {% if data.experience == False %}
+                            <td id="sm-border" label="Experience">
+                                <span class="text-danger">No</span>
+                            </td>
+                        {% else %}
+                            <td id="sm-border" label="Experience">Yes</td>
+                        {% endif %}
+                        <td id="sm-border" label="Received">{{ data.created_at|date:"m/d/Y (H:i)" }}</td>
+                        <td class="btn-side">
+                            <a href="{% url 'candidate' data.id %}"
+                               class="btn btn-secondary my-btn2 btn-sm"
+                               title="View candidate">
+                                <i class="fas fa-user-alt"></i>
+                            </a>
+                            <a href="{% url 'chat_candidate' data.id %}"
+                               class="btn my-btn2 btn-sm ms-1"
+                               title="About candidate"
+                               style="background-color: #e2e3e5">
+                                <i class="fas fa-comment-alt"></i>
+                            </a>
+                            {% if request.user.is_superuser %}
+                                <a href=""
+                                   class="btn btn-danger my-btn2 btn-sm ms-1"
+                                   title="Delete"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#deleteModal{{ data.pk }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            {% else %}
+                                <!-- Statement: If exists company note = show button, Else = disable button -->
+                                {% if data.company_note == '' %}
+                                    <button disabled
+                                            class="btn btn-outline-warning text-dark btn-sm ms-1 my-btn2"
+                                            title="Company Note"
+                                            data-bs-toggle="modal">
+                                        <i class="fas fa-question"></i>
+                                    </button>
+                                    <button disabled class="btn btn-outline-primary text-dark ms-1">
+                                        <i class="fas fa-envelope"></i>
+                                    </button>
+                                {% else %}
+                                    <button class="btn btn-warning text-dark btn-sm ms-1 my-btn2"
+                                            title="Company Note"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#noteModal{{ data.pk }}">
+                                        <i class="fas fa-question"></i>
+                                    </button>
+                                    <button class="btn btn-primary ms-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#emailModal{{ data.pk }}">
+                                        <i class="fas fa-envelope"></i>
+                                    </button>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <!-- If no records found -->
+                    {% empty %}
+                        <td colspan="8">
+                            {{ request.GET.q }} <strong class="text-danger">No records found</strong>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        <!-- Pagination -->
+        <nav>
+            {% if candidates.has_other_pages %}
+                <ul class="pagination">
+                    {% if candidates.has_previous %}
+                        <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}"
+                           class="btn btn-outline-secondary mb-4"
+                           style="border-radius: 1px;
+                                  border: 1px solid #d3d3d3">First</a>
+                        <li class="page-item">
+                            <a href="?page={{ candidates.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}"
+                               class="page-link">
+                                <i class="fas fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"></li>
                     {% endif %}
-                </td>
-                {% empty %}
-                <td colspan="8">{{ request.GET.q }} <strong class="text-danger">No records found</strong></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <hr>
-    <!-- Pagination -->
-    <nav>
-        {% if candidates.has_other_pages %}
-        <ul class="pagination">
-            {% if candidates.has_previous %}
-                <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3;">First</a>
-                <li class="page-item">
-                    <a href="?page={{ candidates.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}" class="page-link">
-                        <i class="fas fa-angle-double-left"></i>
-                    </a>
-                </li>
-            {% else %}
-                <li class="page-item disabled"></li>
+                    {% for i in candidates.paginator.page_range %}
+                        {% if candidates.number == i %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ i }}
+                                    <span class="sr-only"></span>
+                                </span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if candidates.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ candidates.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}"
+                               class="page-link">
+                                <i class="fas fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                        <a href="?page={{ candidates.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}"
+                           class="btn btn-outline-secondary mb-4"
+                           style="border-radius: 1px;
+                                  border: 1px solid #d3d3d3;
+                                  border-left: none">Last</a>
+                    {% else %}
+                        <li class="page-item disabled"></li>
+                    {% endif %}
+                </ul>
             {% endif %}
-            
-            {% for i in candidates.paginator.page_range %}
-                {% if candidates.number == i %}
-                <li class="page-item active">
-                    <span class="page-link">{{ i }}
-                        <span class="sr-only"></span>
-                    </span>
-                </li>
-                {% else %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}">{{ i }}</a>
-                </li>
-                {% endif %}
-            {% endfor %}
-
-            {% if candidates.has_next %}
-            <li class="page-item">
-                <a href="?page={{ candidates.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}" class="page-link">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-            <a href="?page={{ candidates.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% elif request.GET.f %}&f={{ request.GET.f }}{% endif %}" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3; border-left: none;">Last</a>
-            {% else %}
-            <li class="page-item disabled"></li>
-            {% endif %}
-        </ul>
-        {% endif %}
-    </nav>
-    <br><br><br>
-</div>
-
+        </nav>
+        <br>
+        <br>
+        <br>
+    </div>
 {% endblock %}
+<!-- CODE NO LONGER REQUIRED -->
+<!-- 1) This code was present inside nav-content block -->
+<!-- Global search navbar (method not required) -->
+<!--
+<form action="" class="d-flex">
+    <input class="form-control me-1" name="q" type="search" placeholder="Global Search" value="{{ request.GET.q }}">
+    <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
+        <i class="fas fa-search"></i>
+    </button>
+    <a href="{% url 'backend' %}" class="btn btn-secondary ms-1" title="Refresh">
+        <i class="fas fa-sync-alt"></i>
+    </a>
+</form>
+-->
+<!-- 2) This code was present inside content block -->
+<!-- Button -->
+<!-- <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-3 mb-3 my-btn">Log out</a> -->
+<!-- Header -->
+<!-- <h6 class="card p-2 bg-secondary text-light text-center mb-3">LIST OF CANDIDATES</h6> -->
+<!-- Filter (Using native Django filters) -->
+<!-- NOTE: Moved to filter.html -->
+<!-- <form method="POST" class="mt-5 mb-2">
+    {% csrf_token %}
+    <div class="btn-group wd-100" role="group" aria-label="Basic radio toggle button group"> -->
+<!-- Occupation -->
+<!-- <input type="submit" class="btn-check" value="FR-22" name="job" id="btnradio1" autocomplete="off">
+        <label {% if request.POST.job == 'FR-22' %} class="btn btn-secondary" {% else %} class="btn btn-outline-secondary" {% endif %} for="btnradio1">FR-22</label>
+
+        <input type="submit" class="btn-check" value="BA-10" name="job" id="btnradio2" autocomplete="off">
+        <label {% if request.POST.job == 'BA-10' %} class="btn btn-secondary" {% else %} class="btn btn-outline-secondary" {% endif %} for="btnradio2">BA-10</label>
+
+        <input type="submit" class="btn-check" value="FU-15" name="job" id="btnradio3" autocomplete="off">
+        <label {% if request.POST.job == 'FU-15' %} class="btn btn-secondary" {% else %} class="btn btn-outline-secondary" {% endif %} for="btnradio3">FU-15</label>
+&nbsp; &nbsp; -->
+<!-- Gender -->
+<!-- <input type="submit" class="btn-check" value="M" name="gender" id="btnradio4" autocomplete="off">
+        <label {% if request.POST.gender == 'M' %} class="btn btn-primary my-btn2" {% else %} class="btn btn-outline-primary my-btn2" {% endif %} for="btnradio4">M</label>
+
+        <input type="submit" class="btn-check" value="F" name="gender" id="btnradio5" autocomplete="off">
+        <label {% if request.POST.gender == 'F' %} class="btn btn-danger my-btn2" {% else %} class="btn btn-outline-danger my-btn2" {% endif %} for="btnradio5">F</label>
+        &nbsp; &nbsp;
+            -->
+<!-- <button class="btn" style="background: #d3d3d3;" title="Search" type="submit">
+            <i class="fas fa-search"></i>
+        </button> -->
+<!-- </div>
+</form> -->
+<!-- 3) This code was present inside content block -->
+<!--
+{% if data.smoker == "1" %}
+    <td>Yes</td>
+{% else %}
+    <td>No</td>
+{% endif %}
+-->
