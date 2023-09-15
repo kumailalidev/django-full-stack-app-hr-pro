@@ -21,7 +21,8 @@
             background-color: #e2e3e5;
         }
     </style>
-    <div class="container mb-3 mt-3" id="chat-data">
+    <!-- First container -->
+    <div class="container mb-3 mt-4" id="chat-data">
         <button class="btn btn-ligh border-dark" style="cursor: default;">
             Candidate: <strong>{{ candidate.firstname }} {{ candidate.lastname }}</strong>
         </button>
@@ -31,8 +32,9 @@
             {{ candidate.situation }}
         </button>
     </div>
+    <!-- Second container -->
     <div class="container mt-3 mb-5 card-chat">
-        <div class="card border p-4" id="#top">
+        <div class="card border p-4" id="top">
             <form method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="candidate_email" value="{{  candidate.email }}">
