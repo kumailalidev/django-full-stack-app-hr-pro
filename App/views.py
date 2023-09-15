@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from .forms import CandidateForm, EmailForm
-from .models import Candidate, Email
+from django.shortcuts import render, redirect
+from .forms import CandidateForm, EmailForm, Chat_candidateForm
+from .models import Candidate, Email, Chat_candidate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 import pdfkit
 from django.core.mail import EmailMessage
+
+# Get Users
+from django.contrib.auth.models import User
 
 # Concatenate (F-name and L-name)
 from django.db.models.functions import Concat  # Concatenate
@@ -246,5 +249,19 @@ def email(request):
 
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
-def chat_candidate(request):
-    return render(request, "chat_candidate.html")
+def chat_candidate(request, id):
+    candidate = Candidate.objects.get(pk=id)
+    chat_candidate = Chat_candidate.objects.all().order_by("-dt")
+    list_users = User.objects.all()
+    form = Chat_candidateForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("chat_candidate", id=candidate.id)
+    context = {
+        "form": form,
+        "chat_candidate": chat_candidate,
+        "list_users": list_users,
+        "candidate": candidate,
+    }
+
+    return render(request, "chat_candidate.html", context)
