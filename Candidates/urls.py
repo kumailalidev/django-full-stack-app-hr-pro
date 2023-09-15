@@ -41,5 +41,5 @@ urlpatterns = [
     # Email
     path("email", views.email, name="email"),
     # Candidate chat group
-    path("chat_candidate/", views.chat_candidate, name="chat_candidate"),
+    path("chat_candidate/<int:id>/", views.chat_candidate, name="chat_candidate"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

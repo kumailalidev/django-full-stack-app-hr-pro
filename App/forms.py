@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candidate, SMOKER, Email
+from .models import Candidate, SMOKER, Email, Chat_candidate
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from datetime import date  # Used in Birthdate
@@ -819,4 +819,14 @@ class EmailForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
 
     class Meta:
+        fields = "__all__"
+
+
+# CHATBOX
+
+
+# About candidates
+class Chat_candidateForm(forms.ModelForm):
+    class Meta:
+        model = Chat_candidate
         fields = "__all__"
