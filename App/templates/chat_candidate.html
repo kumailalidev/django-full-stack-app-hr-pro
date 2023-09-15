@@ -16,5 +16,33 @@
 
 <!-- Page content -->
     {% block content %}
-    <h1 class="text-center mt-5">Chat group</h1>
+    <style>
+        body {
+            background-color: #e2e3e5;
+        }
+    </style>
+    <div class="container mb-3 mt-3" id="chat-data">
+        <button class="btn btn-ligh border-dark" style="cursor: default;">
+            Candidate: <strong>{{ candidate.firstname }} {{ candidate.lastname }}</strong>
+        </button>
+        <button 
+            class="border-dark btn {% if candidate.situation == 'Pending' %} btn-warning {% elif candidate.situation == 'Approved' %} btn-success {% else %} btn-danger {% endif %}"
+            style="cursor: default;">
+            {{ candidate.situation }}
+        </button>
+    </div>
+    <div class="container mt-3 mb-5 card-chat">
+        <div class="card border p-4" id="top">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="candidate_email" value="{{  candidate.email }}">
+                <input type="hidden" name="user" value="{{  user.get_username }}">
+                <div class="input-group mb-4">
+                    <input type="text" name="chat" class="form-control" placeholder="Your comment here...">
+                    <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                </div>
+                <hr class="text-primary border-5">
+            </form>
+        </div>
+    </div>
     {% endblock content %}
