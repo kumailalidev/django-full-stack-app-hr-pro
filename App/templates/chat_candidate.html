@@ -43,6 +43,23 @@
                 </div>
                 <hr class="text-primary border-5">
             </form>
+            <!-- Logic using template tag -->
+
+            <!-- 'FOR' to get candidate chat -->
+            {% for data in chat_candidate %}
+                {% if data.candidate_email == candidate.email %} <!-- It makes a comparison (two models class) -->
+                    {% for x in list_users %}
+                        {% if x.is_superuser %}
+                            {% if data.user == x.username %}
+                                {% include 'partials/talk_admin.html' %}
+                            {% else %}
+                                {% include 'partials/talk_users.html' %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
             <!-- Go up -->
             {% include 'partials/go_up.html' %}
         </div>
