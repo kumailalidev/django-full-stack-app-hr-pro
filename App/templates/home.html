@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 <!-- Page content -->
 {% block content %}
-  <div class="container card p-3 border-dark text-center mt-5"
-       style="width: 35%">
-    <!-- Success Message -->
-    {% include 'partials/successMsg.html' %}
-    <h1>Job vacancy register</h1>
-    <h5 class="mt-5">Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15</h5>
-    <hr>
-    <div class="d-grid gap-2 mt-4">
-      <a href="{% url 'register' %}" class="btn btn-primary">Registration</a>
-      <a href="{% url 'backend' %}" class="btn btn-warning">LOG IN</a>
+    <div class="container card p-3 border-dark text-center mt-5"
+         style="width: 35%">
+        <!-- Success Message -->
+        {% include 'partials/successMsg.html' %}
+        <h1>Job vacancy register</h1>
+        <h5 class="mt-5">Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15</h5>
+        <hr>
+        <div class="d-grid gap-2 mt-4">
+            <a href="{% url 'register' %}" class="btn btn-primary">Registration</a>
+            <a href="{% url 'backend' %}" class="btn btn-warning">LOG IN</a>
+        </div>
     </div>
-  </div>
 {% endblock content %}
 <!-- CODE NO LONGER REQUIRED -->
 <!-- 1) This code was present inside content block above successMsg.html partial -->
