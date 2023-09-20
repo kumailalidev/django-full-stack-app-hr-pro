@@ -1,30 +1,30 @@
 {% extends "base.html" %}
-
 <!-- Page content -->
 {% block content %}
-    <div class="container card p-3 border-dark text-center mt-5" style="width: 35%;">
-        <!-- Message from backend (success - views.py) -->
-        <!-- <div class="text-center">
-            {% for message in messages %}
-                {% if message.tags == 'success' %}
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <strong>{{ message }}</strong>
-                        <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div> -->
-
-        <!-- Success Message -->
-        {% include 'partials/successMsg.html' %}
-        <h1>Job vacancy register</h1>
-        <h5 class="mt-5">
-            Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15
-        </h5>
-        <hr>
-        <div class="d-grid gap-2 mt-4">
-            <a href="{% url 'register' %}" class="btn btn-primary">Registration</a>
-            <a href="{% url 'backend' %}" class="btn btn-warning">LOG IN</a>
-        </div>
+  <div class="container card p-3 border-dark text-center mt-5"
+       style="width: 35%">
+    <!-- Success Message -->
+    {% include 'partials/successMsg.html' %}
+    <h1>Job vacancy register</h1>
+    <h5 class="mt-5">Frontend: FR-22 &nbsp;|&nbsp; Backend: BA-10 &nbsp;|&nbsp; FullStack: FU-15</h5>
+    <hr>
+    <div class="d-grid gap-2 mt-4">
+      <a href="{% url 'register' %}" class="btn btn-primary">Registration</a>
+      <a href="{% url 'backend' %}" class="btn btn-warning">LOG IN</a>
     </div>
+  </div>
 {% endblock content %}
+<!-- CODE NO LONGER REQUIRED -->
+<!-- 1) This code was present inside content block above successMsg.html partial -->
+<!-- Message from backend (success - views.py) -->
+<!-- <div class="text-center">
+  {% for message in messages %}
+    {% if message.tags == 'success' %}
+      <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </a>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div> -->
