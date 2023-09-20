@@ -4,7 +4,11 @@
         {% if message.tags == 'success' %}
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 <strong>{{ message }}</strong>
-                <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+                <button type="button"
+                        class="btn btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                </a>
             </div>
         {% endif %}
     {% endfor %}
