@@ -2,6 +2,8 @@
 .venv/
 .vscode
 media/
+__pycache__/
 
 # Files
 TODO.md
+*.pyc
