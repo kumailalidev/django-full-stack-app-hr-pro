@@ -107,39 +107,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-    # Validating age
-    # Method 1 (Using type attribute)
-    # age = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             "type": "number",
-    #         }
-    #     )
-    # )
-
-    # Method 02 (Using Regex)
-    # age = forms.CharField(
-    #     label="Your age",
-    #     min_length=2,
-    #     max_length=2,
-    #     error_messages={
-    #         "required": "Age field cannot be empty.",
-    #     },
-    #     validators=[
-    #         RegexValidator(
-    #             r"^[0-9]*$",
-    #             message="Only number is allowed",
-    #         )
-    #     ],
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             "placeholder": "Age",
-    #             "style": "font-size: 13px;",
-    #             # "autocomplete": "off",
-    #         }
-    #     ),
-    # )
-
     # Experience
     experience = forms.BooleanField(
         label="I have experience",
@@ -150,7 +117,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Message
     message = forms.CharField(
         label="About you",
@@ -165,7 +131,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # File (Resume upload)
     file = forms.FileField(
         label="Resume",
@@ -178,7 +143,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Image (Upload photo)
     image = forms.FileField(
         label="Photo",
@@ -190,7 +154,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Institution
     institution = forms.CharField(
         label="Institution",
@@ -203,7 +166,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # College course
     course = forms.CharField(
         min_length=3,
@@ -215,7 +177,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Finished Course
     finished_course = forms.DateTimeField(
         required=False,
@@ -232,7 +193,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # About college course
     about_course = forms.CharField(
         label="About your college course",
@@ -247,7 +207,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # About the Job
     about_job = forms.CharField(
         label="About your last job",
@@ -263,7 +222,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Company
     company = forms.CharField(
         required=False,
@@ -278,7 +236,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Position
     position = forms.CharField(
         required=False,
@@ -293,7 +250,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Started Job
     started_job = forms.DateTimeField(
         required=False,
@@ -309,7 +265,6 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
     # Finished Job
     finished_job = forms.DateTimeField(
         required=False,
@@ -326,7 +281,7 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
-
+    # Employed
     employed = forms.BooleanField(
         label="I am employed",
         required=False,
@@ -337,32 +292,13 @@ class CandidateForm(forms.ModelForm):
             }
         ),
     )
+    # Remote and travel
     remote = forms.BooleanField(label="I agree to work remotely", required=False)
     travel = forms.BooleanField(label="I'm available for travel", required=False)
-
-    # Method # 01 (Gender) (Outside the Meta class)
-    # GENDER = [
-    #     ("M", "Male"),
-    #     ("F", "Female"),
-    # ]
-    # gender = forms.CharField(
-    #     label="Gender",
-    #     widget=forms.RadioSelect(choices=GENDER),
-    # )
 
     class Meta:
         model = Candidate
         exclude = ["created_at", "situation"]
-        # fields = "__all__"
-        # fields = ["firstname", "lastname", "email", "age", "message",]
-
-        # If you use in widget:
-        # labels = {
-        #     "started_course": "Started",
-        #     "finished_course": "Finished",
-        #     "started_job": "Started",
-        #     "finished_job": "Finished",
-        # }
 
         # Native choice field
         SALARY = (
@@ -403,42 +339,6 @@ class CandidateForm(forms.ModelForm):
                     "max": "2030-01-01",
                 }
             ),
-            # Finished Course
-            # "finished_course": forms.DateInput(
-            #     attrs={
-            #         "style": "font-size: 13px; cursor: pointer;",
-            #         "type": "date",
-            #         # Block typing inside the input
-            #         # "onkeydown": "return false",
-            #         "min": "1950-01-01",
-            #         "max": "2030-01-01",
-            #         "disabled": "true",
-            #     }
-            # ),
-            # # Started Job
-            # "started_job": forms.DateInput(
-            #     attrs={
-            #         "style": "font-size: 13px; cursor: pointer;",
-            #         "type": "date",
-            #         # Block typing inside the input
-            #         # "onkeydown": "return false",
-            #         "min": "1950-01-01",
-            #         "max": "2030-01-01",
-            #         "class": "emp",
-            #     }
-            # ),
-            # # Finished Job
-            # "finished_job": forms.DateInput(
-            #     attrs={
-            #         "style": "font-size: 13px; cursor: pointer;",
-            #         "type": "date",
-            #         # Block typing inside the input
-            #         # "onkeydown": "return false",
-            #         "min": "1950-01-01",
-            #         "max": "2030-01-01",
-            #         "class": "emp",
-            #     }
-            # ),
             # Phone field
             "phone": forms.TextInput(
                 attrs={
@@ -487,181 +387,13 @@ class CandidateForm(forms.ModelForm):
         }
 
     # SUPER FUNCTION
-    # Notes
-    #     - Super function controls all the inputs inside frontend, backend and admin
+    # Note: Super function controls all the inputs inside frontend, backend and admin
     def __init__(self, *args, **kwargs):
         super(CandidateForm, self).__init__(*args, **kwargs)
 
-        # NOTE: This will breaks admin
-        # self.fields["started_job"].required = False
-        # self.fields["finished_job"].required = False
+    # END // SUPER FUNCTION
 
-        # Disable inputs (By ID/PK)
-        # instance = getattr(self, "instance", None)
-        # if instance and instance.pk:
-        #     self.fields["firstname"].disabled = True
-
-        # ========== CONTROL PANEL (Individual Inputs) ==========
-
-        # 1) INPUT REQUIRED
-        # self.fields["message"].required = True
-
-        # 2) INPUT DISABLED
-        # self.fields["experience"].disabled = False
-
-        # 3) INPUT READONLY
-        # self.fields["email"].widget.attrs.update(
-        #     {
-        #         "readonly": "readonly",
-        #     }
-        # )
-
-        # 4) SELECT OPTION
-        # self.fields["personality"].choices = [
-        #     ("", "Select a personality"),
-        # ] + list(
-        #     self.fields["personality"].choices
-        # )[1:]
-
-        # 5) WIDGETS (Inside/Outside)
-        """
-        Overrides all the other widget values
-        """
-        # self.fields["phone"].widget.attrs.update(
-        #     {
-        #         "style": "font-size: 18px;",
-        #         "placeholder": "No Phone",
-        #         "data-mask": "(00) 00-00",
-        #     }
-        # )
-
-        # 6) ERROR MESSAGES
-        """
-        Overrides all the other default error messages
-        """
-        # self.fields["firstname"].error_messages.update(
-        #     {
-        #         "required": "This is super function overridden error message",
-        #     }
-        # )
-
-        # ========== ADVANCED CONTROL PANEL (Multiple Inputs) ==========
-        # 1) READONLY
-        # readonly = ["firstname", "lastname", "job", "email", "age", "phone", "message"]
-        # for field in readonly:
-        #     self.fields[field].widget.attrs["readonly"] = "true"
-
-        # 2) DISABLED
-        # disabled = ["personality", "salary", "gender", "smoker", "experience"]
-        # for field in disabled:
-        #     self.fields[field].widget.attrs["disabled"] = "true"
-
-        # 3) ERROR MESSAGES
-        # error_messages = [
-        #     "firstname",
-        #     "lastname",
-        #     "job",
-        #     "email",
-        #     "age",
-        #     "phone",
-        #     "personality",
-        #     "salary",
-        #     "gender",
-        #     "smoker",
-        #     "file",
-        # ]
-        # for field in error_messages:
-        #     self.fields[field].error_messages.update({"required": "Field required!"})
-
-        # 4) FONT SIZE
-        # font_size = [
-        #     "firstname",
-        #     "lastname",
-        #     "job",
-        #     "age",
-        # ]
-        # for field in font_size:
-        #     self.fields[field].widget.attrs.update(
-        #         {
-        #             "style": "font-size: 18px;",
-        #         }
-        #     )
-
-        # 5) AUTO COMPLETE = OFF (Input History)
-        # NOTE: This also control fields inside admin panel, therefore auto_complete fields inside
-        #       admin panel should NOT be readonly
-        # auto_complete = [
-        #     "firstname",
-        #     "lastname",
-        #     "email",
-        #     "phone",
-        # ]
-        # for field in auto_complete:
-        #     self.fields[field].widget.attrs.update(
-        #         {
-        #             "autocomplete": "off",
-        #         }
-        #     )
-
-        # 6) DISABLE ALL INPUTS (By ID/PK)
-        # instance = getattr(self, "instance", None)
-        # array = [
-        #     "experience",
-        #     "gender",
-        #     "firstname",
-        #     "lastname",
-        #     "job",
-        #     "email",
-        #     "phone",
-        #     "salary",
-        #     "birth",
-        #     "personality",
-        #     "smoker",
-        #     "file",
-        #     "image",
-        #     "frameworks",
-        #     "languages",
-        #     "databases",
-        #     "libraries",
-        #     "mobile",
-        #     "others",
-        #     "message",
-        #     "status_course",
-        #     "started_course",
-        #     "finished_course",
-        #     "course",
-        #     "institution",
-        #     "about_course",
-        #     "started_job",
-        #     "finished_job",
-        #     "company",
-        #     "position",
-        #     "about_job",
-        #     "employed",
-        #     "remote",
-        #     "travel",
-        # ]
-        # for field in array:
-        #     if instance and instance.pk:
-        #         self.fields[field].disabled = True
-        #         self.fields['file'].widget.attrs.update({"style": "display: none;"})
-        #         self.fields['image'].widget.attrs.update({"style": "display: none;"})
-
-    # ______________________________________ END // SUPER FUNCTION ______________________________________
-
-    # ====================================== FUNCTION (METHOD CLEAN) ======================================
-
-    # 1) FUNCTION TO PREVENT DUPLICATE ENTRIES
-
-    # Method 1 (loop for)
-    # def clean_email(self):
-    #     email = self.cleaned_data.get("email")
-    #     for obj in Candidate.objects.all():
-    #         if obj.email == email:
-    #             raise forms.ValidationError(
-    #                 "Denied! " + email + "  is already registered."
-    #             )
-    #     return email
+    # FUNCTION (METHOD CLEAN)
 
     # Method 2 (if statement w/ filter)
     def clean_email(self):
@@ -680,15 +412,6 @@ class CandidateForm(forms.ModelForm):
         else:
             raise forms.ValidationError("Denied! This code is invalid.")
 
-    # 3) AGE (Range: 18 - 65)
-    # def clean_age(self):
-    #     age = self.cleaned_data.get("age")
-    #     if age < "18" or age > "65":
-    #         raise forms.ValidationError("Denied! Age must be between 18 and 65")
-    #     # else:
-    #     #     return age
-    #     return age
-
     # 4) PHONE (Prevent incomplete values)
     def clean_phone(self):
         phone = self.cleaned_data.get("phone")
@@ -697,16 +420,6 @@ class CandidateForm(forms.ModelForm):
         # else:
         #     return phone
         return phone
-
-    # 5) RESTRICTION (file extensions - Method 2 via function)
-    # Method 2
-    # def clean_file(self):
-    #     file = self.cleaned_data["file"]
-    #     content_type = file.content_type
-    #     if content_type == "application/pdf" or content_type == "application/msword":
-    #         return file
-    #     else:
-    #         raise forms.ValidationError("Only: PDF - DOC - DOCX")
 
     # Method 3
     def clean_file(self):
@@ -725,43 +438,12 @@ class CandidateForm(forms.ModelForm):
             raise forms.ValidationError("Denied: Maximum allowed is 2mb")
         return file
 
-    # Method 3 (When required is set to False)
-    # def clean_file(self):
-    #     # Get data
-    #     file = self.cleaned_data.get("file", False)
-    #     if file is not None:
-    #         # Variables
-    #         EXT = ["pdf", "doc", "docx"]
-    #         ext = str(file).split(".")[-1]
-    #         type = ext.lower()
-    #         # Statement
-    #         # a) Accept only pdf - doc - docx
-    #         if type not in EXT:
-    #             raise forms.ValidationError("Only: PDF - DOC - DOCX")
-    #         # b) Prevent upload more than 2MB
-    #         if file.size > 2 * 1048476:
-    #             raise forms.ValidationError("Denied: Maximum allowed is 2mb")
-    #         return file
-
     # 6) IMAGE (Maximum upload size = 2mb)
     def clean_image(self):
         image = self.cleaned_data.get("image")
         if image.size > 2 * 1048476:
             raise forms.ValidationError("Denied: Maximum allowed is 2mb")
         return image
-
-    # 7) BIRTHDAY (Rage: 18 and 65) (Jquery datepicker provides validation)
-    # def clean_birth(self):
-    #     birth = self.cleaned_data.get("birth")
-    #     # Variables
-    #     b = birth
-    #     now = date.today()
-    #     age = (now.year - b.year) - ((now.month, now.day) < (b.month, b.day))
-    #     print(age)
-    #     # Statement
-    #     if age < 18 or age > 65:
-    #         raise forms.ValidationError("Denied: Age must be between 18 and 65")
-    #     return birth
 
     # 8) Prevent FUTURES dates (card 3 and card 4)
     # A) College
@@ -771,26 +453,8 @@ class CandidateForm(forms.ModelForm):
             raise forms.ValidationError("Future dates is invalid")
         return started_course
 
-    # def clean_finished_course(self):
-    #     finished_course = self.cleaned_data["finished_course"]
-    #     if finished_course > datetime.date.today():
-    #         raise forms.ValidationError("Future dates is invalid")
-    #     return finished_course
-
     # B) JOB
     def clean_started_job(self):
-        # started_job = self.cleaned_data["started_job"]
-        # if started_job > datetime.date.today():
-        #     raise forms.ValidationError("Future dates is invalid")
-        # return started_job
-
-        # Modified to prevent errors
-        # started_job = self.cleaned_data["started_job"]
-        # if started_job is not None:
-        #     if started_job > datetime.date.today():
-        #         raise forms.ValidationError("Future dates is invalid")
-        # return started_job
-
         started_job = self.cleaned_data["started_job"]
         # if started_job != None and started_job > timezone.now():
         if started_job != None and started_job.date() > timezone.now.date():
@@ -798,21 +462,8 @@ class CandidateForm(forms.ModelForm):
         else:
             return started_job
 
-    # def clean_finished_job(self):
-    #     # finished_job = self.cleaned_data["finished_job"]
-    #     # if finished_job > datetime.date.today():
-    #     #     raise forms.ValidationError("Future dates is invalid")
-    #     # return finished_job
 
-    #     # Modified to prevent errors
-    #     finished_job = self.cleaned_data["finished_job"]
-    #     if finished_job is not None:
-    #         if finished_job > datetime.date.today():
-    #             raise forms.ValidationError("Future dates is invalid")
-    #     return finished_job
-
-
-# Send Email to Candidates
+# SEND EMAIL TO CANDIDATES
 class EmailForm(forms.Form):
     email = forms.EmailField()
     subject = forms.CharField(max_length=100)
@@ -830,3 +481,344 @@ class Chat_candidateForm(forms.ModelForm):
     class Meta:
         model = Chat_candidate
         fields = "__all__"
+
+
+# CODE NO LONGER REQUIRED
+
+# *) This code present inside CandidateForm class (above meta class)
+
+# Validating age
+# Method 1 (Using type attribute)
+# age = forms.CharField(
+#     widget=forms.TextInput(
+#         attrs={
+#             "type": "number",
+#         }
+#     )
+# )
+
+# Method 02 (Using Regex)
+# age = forms.CharField(
+#     label="Your age",
+#     min_length=2,
+#     max_length=2,
+#     error_messages={
+#         "required": "Age field cannot be empty.",
+#     },
+#     validators=[
+#         RegexValidator(
+#             r"^[0-9]*$",
+#             message="Only number is allowed",
+#         )
+#     ],
+#     widget=forms.TextInput(
+#         attrs={
+#             "placeholder": "Age",
+#             "style": "font-size: 13px;",
+#             # "autocomplete": "off",
+#         }
+#     ),
+# )
+
+# Method # 01 (Gender) (Outside the Meta class)
+# GENDER = [
+#     ("M", "Male"),
+#     ("F", "Female"),
+# ]
+# gender = forms.CharField(
+#     label="Gender",
+#     widget=forms.RadioSelect(choices=GENDER),
+# )
+
+# *) This code was present inside Meta class
+
+# fields = "__all__"
+# fields = ["firstname", "lastname", "email", "age", "message",]
+# If you use in widget:
+# labels = {
+#     "started_course": "Started",
+#     "finished_course": "Finished",
+#     "started_job": "Started",
+#     "finished_job": "Finished",
+# }
+
+# Finished Course
+# "finished_course": forms.DateInput(
+#     attrs={
+#         "style": "font-size: 13px; cursor: pointer;",
+#         "type": "date",
+#         # Block typing inside the input
+#         # "onkeydown": "return false",
+#         "min": "1950-01-01",
+#         "max": "2030-01-01",
+#         "disabled": "true",
+#     }
+# ),
+# # Started Job
+# "started_job": forms.DateInput(
+#     attrs={
+#         "style": "font-size: 13px; cursor: pointer;",
+#         "type": "date",
+#         # Block typing inside the input
+#         # "onkeydown": "return false",
+#         "min": "1950-01-01",
+#         "max": "2030-01-01",
+#         "class": "emp",
+#     }
+# ),
+# # Finished Job
+# "finished_job": forms.DateInput(
+#     attrs={
+#         "style": "font-size: 13px; cursor: pointer;",
+#         "type": "date",
+#         # Block typing inside the input
+#         # "onkeydown": "return false",
+#         "min": "1950-01-01",
+#         "max": "2030-01-01",
+#         "class": "emp",
+#     }
+# ),
+
+# *) This code was present inside super function
+
+# NOTE: This will breaks admin
+# self.fields["started_job"].required = False
+# self.fields["finished_job"].required = False
+
+# Disable inputs (By ID/PK)
+# instance = getattr(self, "instance", None)
+# if instance and instance.pk:
+#     self.fields["firstname"].disabled = True
+
+# CONTROL PANEL (Individual Inputs)
+
+# 1) INPUT REQUIRED
+# self.fields["message"].required = True
+
+# 2) INPUT DISABLED
+# self.fields["experience"].disabled = False
+
+# 3) INPUT READONLY
+# self.fields["email"].widget.attrs.update(
+#     {
+#         "readonly": "readonly",
+#     }
+# )
+
+# 4) SELECT OPTION
+# self.fields["personality"].choices = [
+#     ("", "Select a personality"),
+# ] + list(
+#     self.fields["personality"].choices
+# )[1:]
+
+# 5) WIDGETS (Inside/Outside)
+# """
+# Overrides all the other widget values
+# """
+# self.fields["phone"].widget.attrs.update(
+#     {
+#         "style": "font-size: 18px;",
+#         "placeholder": "No Phone",
+#         "data-mask": "(00) 00-00",
+#     }
+# )
+
+# 6) ERROR MESSAGES
+# """
+# Overrides all the other default error messages
+# """
+# self.fields["firstname"].error_messages.update(
+#     {
+#         "required": "This is super function overridden error message",
+#     }
+# )
+
+# ADVANCED CONTROL PANEL (Multiple Inputs)
+# 1) READONLY
+# readonly = ["firstname", "lastname", "job", "email", "age", "phone", "message"]
+# for field in readonly:
+#     self.fields[field].widget.attrs["readonly"] = "true"
+
+# 2) DISABLED
+# disabled = ["personality", "salary", "gender", "smoker", "experience"]
+# for field in disabled:
+#     self.fields[field].widget.attrs["disabled"] = "true"
+
+# 3) ERROR MESSAGES
+# error_messages = [
+#     "firstname",
+#     "lastname",
+#     "job",
+#     "email",
+#     "age",
+#     "phone",
+#     "personality",
+#     "salary",
+#     "gender",
+#     "smoker",
+#     "file",
+# ]
+# for field in error_messages:
+#     self.fields[field].error_messages.update({"required": "Field required!"})
+
+# 4) FONT SIZE
+# font_size = [
+#     "firstname",
+#     "lastname",
+#     "job",
+#     "age",
+# ]
+# for field in font_size:
+#     self.fields[field].widget.attrs.update(
+#         {
+#             "style": "font-size: 18px;",
+#         }
+#     )
+
+# 5) AUTO COMPLETE = OFF (Input History)
+# NOTE: This also control fields inside admin panel, therefore auto_complete fields inside admin panel should NOT be readonly
+# auto_complete = [
+#     "firstname",
+#     "lastname",
+#     "email",
+#     "phone",
+# ]
+# for field in auto_complete:
+#     self.fields[field].widget.attrs.update(
+#         {
+#             "autocomplete": "off",
+#         }
+#     )
+
+# 6) DISABLE ALL INPUTS (By ID/PK)
+# instance = getattr(self, "instance", None)
+# array = [
+#     "experience",
+#     "gender",
+#     "firstname",
+#     "lastname",
+#     "job",
+#     "email",
+#     "phone",
+#     "salary",
+#     "birth",
+#     "personality",
+#     "smoker",
+#     "file",
+#     "image",
+#     "frameworks",
+#     "languages",
+#     "databases",
+#     "libraries",
+#     "mobile",
+#     "others",
+#     "message",
+#     "status_course",
+#     "started_course",
+#     "finished_course",
+#     "course",
+#     "institution",
+#     "about_course",
+#     "started_job",
+#     "finished_job",
+#     "company",
+#     "position",
+#     "about_job",
+#     "employed",
+#     "remote",
+#     "travel",
+# ]
+# for field in array:
+#     if instance and instance.pk:
+#         self.fields[field].disabled = True
+#         self.fields['file'].widget.attrs.update({"style": "display: none;"})
+#         self.fields['image'].widget.attrs.update({"style": "display: none;"})
+
+# *) This code was present inside ContactFrom class (Afer Meta class (Outside of meta class))
+
+# 3) AGE (Range: 18 - 65)
+# def clean_age(self):
+#     age = self.cleaned_data.get("age")
+#     if age < "18" or age > "65":
+#         raise forms.ValidationError("Denied! Age must be between 18 and 65")
+#     # else:
+#     #     return age
+#     return age
+
+# 5) RESTRICTION (file extensions - Method 2 via function)
+# Method 2
+# def clean_file(self):
+#     file = self.cleaned_data["file"]
+#     content_type = file.content_type
+#     if content_type == "application/pdf" or content_type == "application/msword":
+#         return file
+#     else:
+#         raise forms.ValidationError("Only: PDF - DOC - DOCX")
+
+# Method 3 (When required is set to False)
+# def clean_file(self):
+#     # Get data
+#     file = self.cleaned_data.get("file", False)
+#     if file is not None:
+#         # Variables
+#         EXT = ["pdf", "doc", "docx"]
+#         ext = str(file).split(".")[-1]
+#         type = ext.lower()
+#         # Statement
+#         # a) Accept only pdf - doc - docx
+#         if type not in EXT:
+#             raise forms.ValidationError("Only: PDF - DOC - DOCX")
+#         # b) Prevent upload more than 2MB
+#         if file.size > 2 * 1048476:
+#             raise forms.ValidationError("Denied: Maximum allowed is 2mb")
+#         return file
+
+# 7) BIRTHDAY (Rage: 18 and 65) (Jquery datepicker provides validation)
+# def clean_birth(self):
+#     birth = self.cleaned_data.get("birth")
+#     # Variables
+#     b = birth
+#     now = date.today()
+#     age = (now.year - b.year) - ((now.month, now.day) < (b.month, b.day))
+#     print(age)
+#     # Statement
+#     if age < 18 or age > 65:
+#         raise forms.ValidationError("Denied: Age must be between 18 and 65")
+#     return birth
+
+# 8) Prevent FUTURES dates (card 3 and card 4)
+
+# A) College
+# def clean_finished_course(self):
+#     finished_course = self.cleaned_data["finished_course"]
+#     if finished_course > datetime.date.today():
+#         raise forms.ValidationError("Future dates is invalid")
+#     return finished_course
+
+# B) JOB
+# def clean_started_job(self):
+#     # started_job = self.cleaned_data["started_job"]
+#     # if started_job > datetime.date.today():
+#     #     raise forms.ValidationError("Future dates is invalid")
+#     # return started_job
+
+#     # Modified to prevent errors
+#     started_job = self.cleaned_data["started_job"]
+#     if started_job is not None:
+#         if started_job > datetime.date.today():
+#             raise forms.ValidationError("Future dates is invalid")
+#     return started_job
+
+# def clean_finished_job(self):
+#     # finished_job = self.cleaned_data["finished_job"]
+#     # if finished_job > datetime.date.today():
+#     #     raise forms.ValidationError("Future dates is invalid")
+#     # return finished_job
+
+#     # Modified to prevent errors
+#     finished_job = self.cleaned_data["finished_job"]
+#     if finished_job is not None:
+#         if finished_job > datetime.date.today():
+#             raise forms.ValidationError("Future dates is invalid")
+#     return finished_job
