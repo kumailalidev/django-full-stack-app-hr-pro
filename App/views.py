@@ -1,21 +1,17 @@
 from django.shortcuts import render, redirect
-from .forms import CandidateForm, EmailForm, Chat_candidateForm
-from .models import Candidate, Email, Chat_candidate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator
 from django.db.models import Q
-import pdfkit
 from django.core.mail import EmailMessage
-
-# Get Users
 from django.contrib.auth.models import User
-
-# Concatenate (F-name and L-name)
-from django.db.models.functions import Concat  # Concatenate
-from django.db.models import Value as P  # (P = Plus)
+from django.db.models.functions import Concat
+from django.db.models import Value as P
+from .forms import CandidateForm, EmailForm, Chat_candidateForm
+from .models import Candidate, Email, Chat_candidate
+import pdfkit
 
 
 # FRONTEND
@@ -45,13 +41,6 @@ def register(request):
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def backend(request):
-    # Filter (individual)
-    # if request.method == "POST":
-    #     job = request.POST.get("job")
-    #     filter = Candidate.objects.filter(job=job)
-    #     context = {"candidates": filter}
-    #     return render(request, "backend.html", context)  # NOTE: Breaks pagination
-
     # Global Filter
     if "f" in request.GET:
         f = request.GET["f"]
@@ -102,51 +91,6 @@ def backend(request):
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def candidate(request, id):
-    # data = Candidate.objects.get(pk=id)
-    # form = CandidateForm(instance=data)
-    # array = [
-    #     "experience",
-    #     "gender",
-    #     "firstname",
-    #     "lastname",
-    #     "job",
-    #     "email",
-    #     "phone",
-    #     "salary",
-    #     "birth",
-    #     "personality",
-    #     "smoker",
-    #     "file",
-    #     "image",
-    #     "frameworks",
-    #     "languages",
-    #     "databases",
-    #     "libraries",
-    #     "mobile",
-    #     "others",
-    #     "message",
-    #     "status_course",
-    #     "started_course",
-    #     "finished_course",
-    #     "course",
-    #     "institution",
-    #     "about_course",
-    #     "started_job",
-    #     "finished_job",
-    #     "company",
-    #     "position",
-    #     "about_job",
-    #     "employed",
-    #     "remote",
-    #     "travel",
-    # ]
-    # for field in array:
-    #     form.fields[field].disabled = True
-    #     form.fields["file"].widget.attrs.update({"style": "display: none;"})
-    #     form.fields["image"].widget.attrs.update({"style": "display: none;"})
-    # context = {"form": form}
-    # return render(request, "candidate.html", context)
-
     candidate = Candidate.objects.get(pk=id)
     return render(request, "candidate.html", {"candidate": candidate})
 
@@ -187,17 +131,6 @@ def index(request, id):
     }
     path_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-
-    # Method 1 (Simple, but exports the all the content) Generated via URL
-    # pdf = pdfkit.from_url(
-    #     "http://localhost:8000/" + str(c.id),
-    #     False,
-    #     options=options,
-    #     configuration=config,
-    # )
-    # response = HttpResponse(pdf, content_type="application/pdf")
-    # response["Content-disposition"] = "attachment; filename=candidate.pdf"
-    # return response
 
     # Method 2 (Customized, but requires an external file)
     pdf_name = c.firstname + "_" + c.lastname + ".pdf"
@@ -254,8 +187,6 @@ def email(request):
 
 
 # CHATBOX
-
-
 @login_required(login_url="login")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def chat_candidate(request, id):
@@ -274,3 +205,75 @@ def chat_candidate(request, id):
     }
 
     return render(request, "chat_candidate.html", context)
+
+
+# CODE NO LONGER REQUIRED
+
+# *) This code was present inside backend view
+
+# Filter (individual)
+# if request.method == "POST":
+#     job = request.POST.get("job")
+#     filter = Candidate.objects.filter(job=job)
+#     context = {"candidates": filter}
+#     return render(request, "backend.html", context)  # NOTE: Breaks pagination
+
+# *) This code was present inside candidate view
+
+# data = Candidate.objects.get(pk=id)
+# form = CandidateForm(instance=data)
+# array = [
+#     "experience",
+#     "gender",
+#     "firstname",
+#     "lastname",
+#     "job",
+#     "email",
+#     "phone",
+#     "salary",
+#     "birth",
+#     "personality",
+#     "smoker",
+#     "file",
+#     "image",
+#     "frameworks",
+#     "languages",
+#     "databases",
+#     "libraries",
+#     "mobile",
+#     "others",
+#     "message",
+#     "status_course",
+#     "started_course",
+#     "finished_course",
+#     "course",
+#     "institution",
+#     "about_course",
+#     "started_job",
+#     "finished_job",
+#     "company",
+#     "position",
+#     "about_job",
+#     "employed",
+#     "remote",
+#     "travel",
+# ]
+# for field in array:
+#     form.fields[field].disabled = True
+#     form.fields["file"].widget.attrs.update({"style": "display: none;"})
+#     form.fields["image"].widget.attrs.update({"style": "display: none;"})
+# context = {"form": form}
+# return render(request, "candidate.html", context)
+
+# *) This code was present inside index view
+
+# Method 1 (Simple, but exports the all the content) Generated via URL
+# pdf = pdfkit.from_url(
+#     "http://localhost:8000/" + str(c.id),
+#     False,
+#     options=options,
+#     configuration=config,
+# )
+# response = HttpResponse(pdf, content_type="application/pdf")
+# response["Content-disposition"] = "attachment; filename=candidate.pdf"
+# return response
